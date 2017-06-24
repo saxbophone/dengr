@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stddef.h>
 #include <stdint.h>
 
 
@@ -12,9 +13,10 @@ typedef int64_t nanometre_t;
 // this struct stores data describing the measurements of a given CD format
 typedef struct cd_format_t {
     nanometre_t track_pitch;
+    nanometre_t track_length;
     nanometre_t inner_radius;
     nanometre_t outer_radius;
-    nanometre_t track_length;
+    size_t capacity;
 } cd_format_t;
 
 static nanometre_t get_cd_track_length(cd_format_t format) {
@@ -31,12 +33,14 @@ static nanometre_t get_cd_track_length(cd_format_t format) {
 static cd_format_t make_cd_format(
     nanometre_t track_pitch,
     nanometre_t inner_radius,
-    nanometre_t outer_radius
+    nanometre_t outer_radius,
+    size_t capacity
 ) {
     cd_format_t format = {
         .track_pitch = track_pitch,
         .inner_radius = inner_radius,
         .outer_radius = outer_radius,
+        .capacity = capacity,
     };
     format.track_length = get_cd_track_length(format);
     return format;
