@@ -10,6 +10,9 @@ extern "C"{
 
 const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE = 44100;
 
+const dengr_pixel_t DENGR_PIXEL_BLACK = false;
+const dengr_pixel_t DENGR_PIXEL_WHITE = true;
+
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds) {
     return (dengr_audio_samples_t)seconds * DENGR_CDDA_SAMPLE_RATE;
 }
@@ -42,8 +45,17 @@ dengr_co_ordinate_t dengr_get_position_of_audio_byte(
     dengr_cd_full_spec_t spec,
     size_t audio_byte_index
 ) {
-    // NOTE: This code is not correct! Change it to actually work it out.
+    // TODO: Write proper implementation
     return (dengr_co_ordinate_t) { .x = 0, .y = 0, };
+}
+
+dengr_pixel_t dengr_get_pixel_at_position(
+    dengr_cd_full_spec_t spec,
+    dengr_co_ordinate_t position,
+    dengr_bitmap_t image
+) {
+    // TODO: Write proper implementation
+    return DENGR_PIXEL_BLACK;
 }
 
 static dengr_nanometre_t dengr_get_cd_track_length(

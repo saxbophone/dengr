@@ -2,6 +2,7 @@
 #ifndef SAXBOPHONE_DENGR_DENGR_H
 #define SAXBOPHONE_DENGR_DENGR_H
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -54,8 +55,21 @@ typedef struct dengr_co_ordinate_t {
     dengr_nanometre_t y;
 } dengr_co_ordinate_t;
 
+// image pixel type
+typedef bool dengr_pixel_t;
+
+// bitmap image type
+typedef struct dengr_bitmap_t {
+    size_t width;
+    size_t height;
+    dengr_pixel_t** pixels;
+} dengr_bitmap_t;
+
 // CD Digital Audio sample rate
 extern const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE;
+// constants for the pixel colour values
+extern const dengr_pixel_t DENGR_PIXEL_BLACK;
+extern const dengr_pixel_t DENGR_PIXEL_WHITE;
 
 // convert a unit of time in seconds to samples
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds);
@@ -74,6 +88,18 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 dengr_co_ordinate_t dengr_get_position_of_audio_byte(
     dengr_cd_full_spec_t spec,
     size_t audio_byte_index
+);
+
+/*
+ * for a given full CD spec, x-y co-ordinates of a point on a CD pertaining to
+ * that CD spec and a bitmap image, find the image pixel which is located at the
+ * given x-y co-ordinates if the image was mapped at a 1:1 ratio to the CD
+ * program area
+ */
+dengr_pixel_t dengr_get_pixel_at_position(
+    dengr_cd_full_spec_t spec,
+    dengr_co_ordinate_t position,
+    dengr_bitmap_t image
 );
 
 #ifdef __cplusplus
