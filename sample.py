@@ -23,7 +23,6 @@ def draw_spiral(_a, _b, _step=0.5, loops=5):
     turtle.color("blue")
     turtle.down()
     turtle.goto(prev_x, prev_y)
-    i = 0
     while theta < 2 * loops * math.pi:
         theta += (step / r)
         r = a + b*theta
