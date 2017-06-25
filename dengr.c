@@ -8,8 +8,10 @@
 extern "C"{
 #endif
 
+const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE = 44100;
+
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds) {
-    return (dengr_audio_samples_t)seconds * 44100;
+    return (dengr_audio_samples_t)seconds * DENGR_CDDA_SAMPLE_RATE;
 }
 
 dengr_audio_samples_t dengr_minutes_to_samples(dengr_audio_minutes_t minutes) {

@@ -48,10 +48,16 @@ typedef struct dengr_cd_full_spec_t {
     size_t capacity;
 } dengr_cd_full_spec_t;
 
+// CD Digital Audio sample rate
+extern const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE;
+
+// convert a unit of time in seconds to samples
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds);
 
+// convert a unit of time in minutes to samples
 dengr_audio_samples_t dengr_minutes_to_samples(dengr_audio_minutes_t minutes);
 
+// for a user-supplied description of a CD, derive more detailed data about it
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 
 #ifdef __cplusplus
