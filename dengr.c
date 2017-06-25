@@ -14,6 +14,10 @@ const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE = 44100;
 const dengr_pixel_t DENGR_PIXEL_BLACK = false;
 const dengr_pixel_t DENGR_PIXEL_WHITE = true;
 
+dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm) {
+    return (dengr_nanometre_t)mm * 1000000;
+}
+
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds) {
     return (dengr_audio_samples_t)seconds * DENGR_CDDA_SAMPLE_RATE;
 }

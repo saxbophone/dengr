@@ -11,6 +11,8 @@
 extern "C"{
 #endif
 
+// millimetres type
+typedef int64_t dengr_millimetre_t;
 /*
  * a nanometre (nm) is one billionth of a metre, hence we need a range that can
  * represent ~6km in nm (6,000,000,000,000) and then some. It also needs to be
@@ -70,6 +72,9 @@ extern const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE;
 // constants for the pixel colour values
 extern const dengr_pixel_t DENGR_PIXEL_BLACK;
 extern const dengr_pixel_t DENGR_PIXEL_WHITE;
+
+// convert a measurement in mm to nm (nanometres)
+dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm);
 
 // convert a unit of time in seconds to samples
 dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds);
