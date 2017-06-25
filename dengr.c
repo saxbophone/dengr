@@ -54,8 +54,16 @@ dengr_pixel_t dengr_get_pixel_at_position(
     dengr_co_ordinate_t position,
     dengr_bitmap_t image
 ) {
-    // TODO: Write proper implementation
-    return DENGR_PIXEL_BLACK;
+    // shift the co-ordinates to be only positive and in range of CD size
+    position.x += spec.outer_radius;
+    position.y += spec.outer_radius;
+    // get the de-scaling factor for both dimensions
+    long double descale_factor = (long double)spec.outer_radius * 2.0l;
+    // de-scale then re-scale each dimension to the image's dimensions
+    size_t x_index = ((long double)position.x / descale_factor) * image.width;
+    size_t y_index = ((long double)position.y / descale_factor) * image.height;
+    // apply modulo to protect from (unlikely) out-of-bounds
+    return image.pixels[x_index % image.width][y_index % image.height];
 }
 
 static dengr_nanometre_t dengr_get_cd_track_length(
