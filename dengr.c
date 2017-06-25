@@ -38,6 +38,14 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(
     };
 }
 
+dengr_co_ordinate_t dengr_get_position_of_audio_byte(
+    dengr_cd_full_spec_t spec,
+    size_t audio_byte_index
+) {
+    // NOTE: This code is not correct! Change it to actually work it out.
+    return (dengr_co_ordinate_t) { .x = 0, .y = 0, };
+}
+
 static dengr_nanometre_t dengr_get_cd_track_length(
     dengr_cd_brief_spec_t brief
 ) {
