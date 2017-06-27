@@ -86,13 +86,16 @@ dengr_audio_samples_t dengr_minutes_to_samples(dengr_audio_minutes_t minutes);
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 
 /*
- * for a given full CD spec and an index of the byte of audio to find, find the
- * x-y co-ordinates of that byte of audio as it would appear on the CD's track
- * (a spiral of equal distance between turns)
+ * for a given full CD spec, a maximum number of points to plot (no limit set if
+ * 0), a pointer to custom data of a user-defined type and a callback to a
+ * function which receives each co-ordinate and the custom data pointer as
+ * arguments, find all the x-y co-ordinates of the CD and call the given
+ * callback with each x-y co-ordinate found (and the user data too)
  */
-dengr_co_ordinate_t dengr_get_position_of_audio_byte(
-    dengr_cd_full_spec_t spec,
-    size_t audio_byte_index
+void dengr_trace_cd_spiral(
+    dengr_cd_full_spec_t spec, size_t max_points,
+    void(* callback)(dengr_co_ordinate_t co_ordinate, void* user_data),
+    void* user_data
 );
 
 /*

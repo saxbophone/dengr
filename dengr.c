@@ -46,12 +46,14 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(
     };
 }
 
-dengr_co_ordinate_t dengr_get_position_of_audio_byte(
-    dengr_cd_full_spec_t spec,
-    size_t audio_byte_index
+void dengr_trace_cd_spiral(
+    dengr_cd_full_spec_t spec, size_t max_points,
+    void(* callback)(dengr_co_ordinate_t co_ordinate, void* user_data),
+    void* user_data
 ) {
-    // TODO: Write proper implementation
-    return (dengr_co_ordinate_t) { .x = 0, .y = 0, };
+    // TODO: Actual implementation
+    // NOTE: This is tricky. Use existing file sample.py as algorithm reference.
+    return;
 }
 
 dengr_pixel_t dengr_get_pixel_at_position(
