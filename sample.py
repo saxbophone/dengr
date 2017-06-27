@@ -18,17 +18,21 @@ def draw_spiral(_a, _b, _step=0.5, count=5):
     step = float(_step)
     theta = 0.0
     r = a
-    prev_x = int(r*math.cos(theta))
-    prev_y = int(r*math.sin(theta))
+    prev_x = int(r * math.cos(theta))
+    prev_y = int(r * math.sin(theta))
     turtle.color("blue")
     turtle.down()
     turtle.goto(prev_x, prev_y)
-    for _ in range(count):
-        theta += (step / r)
-        r = a + b*theta
+    for i in xrange(count):
+        theta += (step / (r * 2 * math.pi))
+        r = a + (b * theta)
         # Draw pixels, but remember to convert to Cartesian:
-        x = int(r*math.cos(theta))
-        y = int(r*math.sin(theta))
+        x = int(r * math.cos(theta * 2 * math.pi))
+        y = int(r * math.sin(theta * 2 * math.pi))
+        if i % 2 == 0:
+            turtle.color("red")
+        else:
+            turtle.color("blue")
         turtle.goto(x, y)
         prev_x = x
         prev_y = y
