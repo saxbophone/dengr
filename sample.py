@@ -3,15 +3,15 @@ import math
 import turtle
 
 
-def draw_spiral(_a, _b, _step=0.5, loops=5):
+def draw_spiral(_a, _b, _step=0.5, count=5):
     """
     Draw the Archimdean spiral defined by:
     r = a + b*theta
     Args:
-        a (real): First parameter
-        b (real): Second parameter
-        step (real): How much theta should increment by. (default: 0.5)
-        loops (int): How many times theta should loop around. (default: 5)
+        a (real): inner radius
+        b (real): pitch
+        step (real): distance between points
+        count (int): number of points to plot
     """
     a = float(_a)
     b = float(_b)
@@ -23,7 +23,7 @@ def draw_spiral(_a, _b, _step=0.5, loops=5):
     turtle.color("blue")
     turtle.down()
     turtle.goto(prev_x, prev_y)
-    while theta < 2 * loops * math.pi:
+    for _ in range(count):
         theta += (step / r)
         r = a + b*theta
         # Draw pixels, but remember to convert to Cartesian:
