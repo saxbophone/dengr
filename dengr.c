@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -46,13 +47,51 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(
     };
 }
 
+static dengr_co_ordinate_t dengr_polar_to_cartesian(
+    long double radius, long double angle
+);
+
 void dengr_trace_cd_spiral(
     dengr_cd_full_spec_t spec, size_t max_points,
     void(* callback)(dengr_co_ordinate_t co_ordinate, void* user_data),
     void* user_data
 ) {
-    // TODO: Actual implementation
-    // NOTE: This is tricky. Use existing file sample.py as algorithm reference.
+    // we must be given a callback
+    assert(callback != NULL);
+    // work out how many points we are asked to plot
+    size_t point_count = spec.capacity;
+    if(max_points != 0 && max_points < spec.capacity) {
+        point_count = max_points;
+    }
+    // store inner radius now as we'll make frequent use of it
+    long double inner_radius = (long double)spec.inner_radius;
+    // store pitch for the same reason
+    long double pitch = (long double)spec.track_pitch;
+    // this is the size of the angle, measured in 'turns'
+    long double angle = 0.0l;
+    // this is the radius of the spiral, and keeps increasing with angle
+    long double radius = inner_radius;
+    // the first point is a one-off
+    callback(dengr_polar_to_cartesian(radius, angle), user_data);
+    /*
+     * the 'step' is the angular increase we need to make to keep a constant
+     * distance between each point of the spiral.
+     */
+    long double step = (long double)spec.track_length / spec.capacity;
+    // this is the main loop of the point-plotting algorithm
+    for(size_t i = 0; i < point_count; i++) {
+        /*
+         * update angle (based on a proportional increase of step to keep equal
+         * distance)
+         */
+        angle += step / (radius * 2 * M_PI);
+        // This bit is the magic of Archimedes' spiral equation :)
+        // r = a + b * theta
+        radius = inner_radius + pitch * angle;
+        // give the x-y co-ordinate to the callback
+        callback(dengr_polar_to_cartesian(radius, angle), user_data);
+    }
+    // end
     return;
 }
 
@@ -91,6 +130,15 @@ static size_t dengr_get_size_of_play_time_in_bytes(
 ) {
     // each sample is doubled because it's in stereo. each sample is 2 bytes
     return (size_t)play_time * 2 * 2;
+}
+
+static dengr_co_ordinate_t dengr_polar_to_cartesian(
+    long double radius, long double angle
+) {
+    return (dengr_co_ordinate_t){
+        .x = (dengr_nanometre_t)(radius * cosl(angle * 2.0l * M_PI)),
+        .y = (dengr_nanometre_t)(radius * sinl(angle * 2.0l * M_PI)),
+    };
 }
 
 #ifdef __cplusplus
