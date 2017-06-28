@@ -12,16 +12,22 @@ struct my_user_data {
 };
 
 static void my_callback(dengr_co_ordinate_t co_ordinate, void* user_data) {
+    static size_t sames;
+    static dengr_pixel_t current_colour;
     // retrieve user data
     struct my_user_data data = *(struct my_user_data*)user_data;
-    printf(
-        "%d",
-        dengr_get_pixel_at_position(
-            *data.spec,
-            co_ordinate,
-            *data.image
-        )
+    dengr_pixel_t next_colour = dengr_get_pixel_at_position(
+        *data.spec,
+        co_ordinate,
+        *data.image
     );
+    if(current_colour == next_colour) {
+        sames++;
+    } else {
+        current_colour = next_colour;
+        printf("%zu\n", sames);
+        sames = 0;
+    }
 }
 
 int main(void) {
