@@ -5,17 +5,7 @@
 
 
 static void my_callback(dengr_co_ordinate_t co_ordinate, void* user_data) {
-    static dengr_nanometre_t max_x = 0;
-    static dengr_nanometre_t max_y = 0;
-    if(co_ordinate.x > max_x || co_ordinate.y > max_y) {
-        printf("(%" PRId64 ", %" PRId64 ")\n", co_ordinate.x, co_ordinate.y);
-    }
-    if(co_ordinate.x > max_x) {
-        max_x = co_ordinate.x;
-    }
-    if(co_ordinate.y > max_y) {
-        max_y = co_ordinate.y;
-    }
+    printf("(%" PRId64 ", %" PRId64 ")\n", co_ordinate.x, co_ordinate.y);
 }
 
 int main(void) {
@@ -38,7 +28,7 @@ int main(void) {
     };
     // get full specs of CD format
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
-    printf("CD audio data in bytes: %" PRId64 "\n", cd_specs.capacity);
+    printf("CD audio data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
     // trace the spiral!
     dengr_trace_cd_spiral(cd_specs, 0, my_callback, NULL);
