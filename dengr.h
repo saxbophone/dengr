@@ -88,13 +88,17 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 /*
  * for a given full CD spec, a maximum number of points to plot (no limit set if
  * 0), a pointer to custom data of a user-defined type and a callback to a
- * function which receives each co-ordinate and the custom data pointer as
- * arguments, find all the x-y co-ordinates of the CD and call the given
- * callback with each x-y co-ordinate found (and the user data too)
+ * function which receives each co-ordinate, index of point found and the custom
+ * data pointer as arguments, find all the x-y co-ordinates of the CD and call
+ * the given callback with each x-y co-ordinate found (and the user data too)
  */
 void dengr_trace_cd_spiral(
     dengr_cd_full_spec_t spec, size_t max_points,
-    void(* callback)(dengr_co_ordinate_t co_ordinate, void* user_data),
+    void(* callback)(
+        dengr_co_ordinate_t co_ordinate,
+        size_t index,
+        void* user_data
+    ),
     void* user_data
 );
 
@@ -108,6 +112,19 @@ dengr_pixel_t dengr_get_pixel_at_position(
     dengr_cd_full_spec_t spec,
     dengr_co_ordinate_t position,
     dengr_bitmap_t image
+);
+
+/*
+ * for a given full CD spec, an image to plot, a callback into which raw audio
+ * data is sent and a pointer to custom data of a user-defined type, convert the
+ * image to raw 16-bit signed PCM audio, which is written out through the write
+ * callback.
+ */
+void dengr_plot_image_to_audio(
+    dengr_cd_full_spec_t spec,
+    dengr_bitmap_t image,
+    void(* write_callback)(uint8_t item, void* user_data),
+    void* user_data
 );
 
 #ifdef __cplusplus

@@ -11,7 +11,7 @@ struct my_user_data {
     dengr_bitmap_t* image;
 };
 
-static void my_callback(dengr_co_ordinate_t co_ordinate, void* user_data) {
+static void my_callback(dengr_co_ordinate_t co_ordinate, size_t i, void* user_data) {
     static size_t sames;
     static dengr_pixel_t current_colour;
     // retrieve user data
@@ -25,7 +25,7 @@ static void my_callback(dengr_co_ordinate_t co_ordinate, void* user_data) {
         sames++;
     } else {
         current_colour = next_colour;
-        printf("%zu\n", sames);
+        printf("%zu %zu\n", i, sames);
         sames = 0;
     }
 }
@@ -58,12 +58,7 @@ int main(void) {
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
     printf("CD audio data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
-    // set up user data
-    struct my_user_data user_data = {
-        .spec = &cd_specs,
-        .image = &image,
-    };
-    // trace the spiral!
-    dengr_trace_cd_spiral(cd_specs, 0, my_callback, (void*)&user_data);
+    // convert image to audio
+    dengr_plot_image_to_audio(cd_specs, image, NULL, NULL);
     return 0;
 }
