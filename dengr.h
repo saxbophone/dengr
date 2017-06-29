@@ -114,19 +114,6 @@ dengr_pixel_t dengr_get_pixel_at_position(
     dengr_bitmap_t image
 );
 
-/*
- * for a given full CD spec, an image to plot, a callback into which raw audio
- * data is sent and a pointer to custom data of a user-defined type, convert the
- * image to raw 16-bit signed PCM audio, which is written out through the write
- * callback.
- */
-void dengr_plot_image_to_audio(
-    dengr_cd_full_spec_t spec,
-    dengr_bitmap_t image,
-    void(* write_callback)(uint8_t item, void* user_data),
-    void* user_data
-);
-
 #ifdef __cplusplus
 } // extern "C"
 #endif

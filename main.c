@@ -5,31 +5,6 @@
 #include "dengr.h"
 
 
-// user data for callback
-struct my_user_data {
-    dengr_cd_full_spec_t* spec;
-    dengr_bitmap_t* image;
-};
-
-static void my_callback(dengr_co_ordinate_t co_ordinate, size_t i, void* user_data) {
-    static size_t sames;
-    static dengr_pixel_t current_colour;
-    // retrieve user data
-    struct my_user_data data = *(struct my_user_data*)user_data;
-    dengr_pixel_t next_colour = dengr_get_pixel_at_position(
-        *data.spec,
-        co_ordinate,
-        *data.image
-    );
-    if(current_colour == next_colour) {
-        sames++;
-    } else {
-        current_colour = next_colour;
-        printf("%zu %zu\n", i, sames);
-        sames = 0;
-    }
-}
-
 int main(void) {
     // a 'chequered' image
     dengr_pixel_t image_pixels[2][2] = {
@@ -58,7 +33,5 @@ int main(void) {
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
     printf("CD audio data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
-    // convert image to audio
-    dengr_plot_image_to_audio(cd_specs, image, NULL, NULL);
-    return 0;
+    return 1;
 }
