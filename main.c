@@ -27,11 +27,11 @@ int main(void) {
         .track_pitch = 1500,
         .inner_radius = dengr_mm_to_nm(25),
         .outer_radius = dengr_mm_to_nm(58),
-        .play_time = dengr_minutes_to_samples(80),
+        .sector_count = 360000, // number of sectors in 80-minute / 700MiB discs
     };
     // get full specs of CD format
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
-    printf("CD audio data in bytes: %zu\n", cd_specs.capacity);
+    printf("CD accessible data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
     return 1;
 }

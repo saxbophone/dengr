@@ -12,7 +12,7 @@
 extern "C"{
 #endif
 
-const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE = 44100;
+const size_t DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE = 2336;
 
 const dengr_pixel_t DENGR_PIXEL_BLACK = false;
 const dengr_pixel_t DENGR_PIXEL_WHITE = true;
@@ -21,21 +21,9 @@ dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm) {
     return (dengr_nanometre_t)mm * 1000000;
 }
 
-dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds) {
-    return (dengr_audio_samples_t)seconds * DENGR_CDDA_SAMPLE_RATE;
-}
+static dengr_nanometre_t dengr_get_cd_track_length(dengr_cd_brief_spec_t brief);
 
-dengr_audio_samples_t dengr_minutes_to_samples(dengr_audio_minutes_t minutes) {
-    return dengr_seconds_to_samples((dengr_audio_seconds_t)minutes * 60);
-}
-
-static dengr_nanometre_t dengr_get_cd_track_length(
-    dengr_cd_brief_spec_t brief
-);
-
-static size_t dengr_get_size_of_play_time_in_bytes(
-    dengr_audio_samples_t play_time
-);
+static size_t dengr_get_cd_capacity(dengr_cd_brief_spec_t brief);
 
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(
     dengr_cd_brief_spec_t brief
@@ -45,7 +33,7 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(
         .track_length = dengr_get_cd_track_length(brief),
         .inner_radius = brief.inner_radius,
         .outer_radius = brief.outer_radius,
-        .capacity = dengr_get_size_of_play_time_in_bytes(brief.play_time),
+        .capacity = dengr_get_cd_capacity(brief),
     };
 }
 
@@ -131,11 +119,8 @@ static dengr_nanometre_t dengr_get_cd_track_length(
     );
 }
 
-static size_t dengr_get_size_of_play_time_in_bytes(
-    dengr_audio_samples_t play_time
-) {
-    // each sample is doubled because it's in stereo. each sample is 2 bytes
-    return (size_t)play_time * 2 * 2;
+static size_t dengr_get_cd_capacity(dengr_cd_brief_spec_t brief) {
+    return brief.sector_count * DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE;
 }
 
 static dengr_co_ordinate_t dengr_polar_to_cartesian(

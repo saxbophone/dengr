@@ -19,12 +19,6 @@ typedef int64_t dengr_millimetre_t;
  * negative for convenience when dealing in 2-dimensional space.
  */
 typedef int64_t dengr_nanometre_t;
-// measures audio length in samples
-typedef uint32_t dengr_audio_samples_t;
-// measures audio length in seconds
-typedef uint16_t dengr_audio_seconds_t;
-// measures audio length in minutes
-typedef uint8_t dengr_audio_minutes_t;
 
 /*
  * this struct stores basic data about a CD's specifications
@@ -34,7 +28,7 @@ typedef struct dengr_cd_brief_spec_t {
     dengr_nanometre_t track_pitch;
     dengr_nanometre_t inner_radius;
     dengr_nanometre_t outer_radius;
-    dengr_audio_samples_t play_time;
+    size_t sector_count;
 } dengr_cd_brief_spec_t;
 
 /*
@@ -67,20 +61,15 @@ typedef struct dengr_bitmap_t {
     dengr_pixel_t** pixels;
 } dengr_bitmap_t;
 
-// CD Digital Audio sample rate
-extern const dengr_audio_samples_t DENGR_CDDA_SAMPLE_RATE;
+// amount of bytes available for application use per sector in mode-2 CD-ROMS
+extern const size_t DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE;
+
 // constants for the pixel colour values
 extern const dengr_pixel_t DENGR_PIXEL_BLACK;
 extern const dengr_pixel_t DENGR_PIXEL_WHITE;
 
 // convert a measurement in mm to nm (nanometres)
 dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm);
-
-// convert a unit of time in seconds to samples
-dengr_audio_samples_t dengr_seconds_to_samples(dengr_audio_seconds_t seconds);
-
-// convert a unit of time in minutes to samples
-dengr_audio_samples_t dengr_minutes_to_samples(dengr_audio_minutes_t minutes);
 
 // for a user-supplied description of a CD, derive more detailed data about it
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
