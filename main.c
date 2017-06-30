@@ -52,7 +52,8 @@ int main(void) {
         .track_pitch = 1500,
         .inner_radius = dengr_mm_to_nm(25),
         .outer_radius = dengr_mm_to_nm(58),
-        .play_time = dengr_minutes_to_samples(80),
+        // for some reason, my discs store 79:57 (mm:ss) of audio
+        .play_time = dengr_minutes_to_samples(80) - dengr_seconds_to_samples(3),
     };
     // get full specs of CD format
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
