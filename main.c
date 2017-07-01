@@ -11,6 +11,7 @@ int main(void) {
         { DENGR_PIXEL_BLACK, DENGR_PIXEL_WHITE, },
         { DENGR_PIXEL_WHITE, DENGR_PIXEL_BLACK, },
     };
+    // allocate data for the image and copy pixels across
     dengr_bitmap_t image = {
         .width = 2,
         .height = 2,

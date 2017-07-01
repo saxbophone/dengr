@@ -97,6 +97,8 @@ void dengr_plot_image_to_audio(
     ),
     void* write_sector_data
 ) {
+    // we must be given a callback
+    assert(write_sector != NULL);
     // build context data for callback
     struct dengr_co_ord_handler_data_t user_data = {
         .spec = &spec,
