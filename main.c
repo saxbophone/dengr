@@ -5,6 +5,14 @@
 #include "dengr.h"
 
 
+static void write_sector(
+    size_t sector_index,
+    dengr_audio_sector_t sector,
+    void* write_sector_data
+) {
+    printf("Sector #%zu\n", sector_index);
+}
+
 int main(void) {
     // a 'chequered' image
     dengr_pixel_t image_pixels[2][2] = {
@@ -35,6 +43,6 @@ int main(void) {
     printf("CD accessible data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
     // convert image to audio
-    dengr_plot_image_to_audio(cd_specs, image, NULL, NULL);
+    dengr_plot_image_to_audio(cd_specs, image, write_sector, NULL);
     return 0;
 }

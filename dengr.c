@@ -211,33 +211,33 @@ static void dengr_co_ord_handler(
     void* user_data
 ) {
     // cast user data back to our struct type and dereference
-    struct dengr_co_ord_handler_data_t context = (
-        *(struct dengr_co_ord_handler_data_t*)user_data
+    struct dengr_co_ord_handler_data_t* context = (
+        (struct dengr_co_ord_handler_data_t*)user_data
     );
     const size_t sector_index = index % DENGR_CDDA_SECTOR_SIZE;
     // retrieve the image pixel at given co-ordinate and write to sector buffer
-    context.sector.data[sector_index] = dengr_get_efm_byte_for_pixel(
+    context->sector.data[sector_index] = dengr_get_efm_byte_for_pixel(
         dengr_get_pixel_at_position(
-            *context.spec,
+            *context->spec,
             co_ordinate,
-            *context.image
+            *context->image
         )
     );
     /*
      * if this is the last byte of the sector, then we can now run the remainder
      * of processing steps which operate on the entire sector.
      */
-    if(sector_index == DENGR_CDDA_SECTOR_SIZE - 1) {
+    if(sector_index == (DENGR_CDDA_SECTOR_SIZE - 1)) {
         // reverse the CIRC encoding and 'scrambling' system
-        context.sector = dengr_reverse_sector_encoding(context.sector);
+        context->sector = dengr_reverse_sector_encoding(context->sector);
         // flush the data out to be written
-        context.write_sector_callback(
-            context.sector_count,
-            context.sector,
-            context.write_sector_data
+        context->write_sector_callback(
+            context->sector_count,
+            context->sector,
+            context->write_sector_data
         );
         // increment sector count
-        context.sector_count++;
+        context->sector_count++;
     }
 }
 
@@ -270,6 +270,7 @@ static dengr_pixel_t dengr_get_pixel_at_position(
 static dengr_audio_sector_t dengr_reverse_sector_encoding(
     dengr_audio_sector_t sector
 ) {
+    // TODO: Write actual implementation, this one just returns it as-is...
     return sector;
 }
 
