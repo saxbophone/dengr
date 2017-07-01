@@ -16,7 +16,7 @@ The overall process involves generating a raw LCPM audio file that when burned t
         - convert the byte offset to a physical offset as the number of nm along the spiral from it's origin point that the byte will be physically located on the disc.
         - get the x/y coördinates of this point in the spiral as mapped into cartesian space.
         - sample the image to see which pixel this x/y point lies in and what colour that pixel is.
-        - write out byte `0x30` if it is to be black, or `0xAB` if it is to be white.
+        - write out byte `0x30` if it is to be black, or `0xAB` if it is to be white (this handles the lower-most layer of encoding, which is EFM [eight-to-fourteen modulation])
     - Reverse-CIRC-encode the sector data (so that the result would produce the input sequence when CIRC encoding is applied to it).
     - Reverse-scramble the sector data according to ECMA-130 (so that the result would produce the input sequennce when scrambling is applied to it).
     - Write out the raw resulting data to file.
