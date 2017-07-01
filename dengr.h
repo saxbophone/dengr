@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 
 
 #ifdef __cplusplus
@@ -85,16 +86,26 @@ dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm);
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 
 /*
- * for a given full CD spec, an image to plot, a callback into which raw audio
- * data is sent and a pointer to custom data of a user-defined type, convert the
- * image to raw 16-bit signed PCM audio, which is written out through the write
- * callback.
+ * Produces a stream of raw LPCM CD Audio which when written to a CD as a red
+ * book audio disc will make an image appear on the recoding side of the disc.
  */
 void dengr_plot_image_to_audio(
     dengr_cd_full_spec_t spec,
     dengr_bitmap_t image,
-    void(* write_callback)(uint8_t item, void* user_data),
+    void(* write_sector)(
+        size_t sector_index, dengr_audio_sector_t sector, void* user_data
+    ),
     void* user_data
+);
+
+/*
+ * Does the same thing as dengr_plot_image_to_audio(), except the raw LPCM CD
+ * Audio is written to the given file handle instead.
+ */
+void dengr_plot_image_to_audio_file(
+    dengr_cd_brief_spec_t spec,
+    dengr_bitmap_t image,
+    FILE* output_file
 );
 
 #ifdef __cplusplus
