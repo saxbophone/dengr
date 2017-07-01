@@ -2,7 +2,6 @@
 #ifndef SAXBOPHONE_DENGR_DENGR_H
 #define SAXBOPHONE_DENGR_DENGR_H
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -56,7 +55,10 @@ typedef struct dengr_co_ordinate_t {
 } dengr_co_ordinate_t;
 
 // image pixel type
-typedef bool dengr_pixel_t;
+typedef enum dengr_pixel_t {
+    DENGR_PIXEL_BLACK,
+    DENGR_PIXEL_WHITE,
+} dengr_pixel_t;
 
 // bitmap image type
 typedef struct dengr_bitmap_t {
@@ -65,19 +67,10 @@ typedef struct dengr_bitmap_t {
     dengr_pixel_t** pixels;
 } dengr_bitmap_t;
 
-// one CD audio-sector's worth of pixels
-typedef struct dengr_pixel_sector_t {
-    dengr_pixel_t pixels[DENGR_CDDA_SECTOR_SIZE];
-} dengr_pixel_sector_t;
-
 // one CD audio sector's worth of audio bytes
 typedef struct dengr_audio_sector_t {
     uint8_t data[DENGR_CDDA_SECTOR_SIZE];
 } dengr_audio_sector_t;
-
-// constants for the pixel colour values
-extern const dengr_pixel_t DENGR_PIXEL_BLACK;
-extern const dengr_pixel_t DENGR_PIXEL_WHITE;
 
 // convert a measurement in mm to nm (nanometres)
 dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm);
@@ -93,9 +86,11 @@ void dengr_plot_image_to_audio(
     dengr_cd_full_spec_t spec,
     dengr_bitmap_t image,
     void(* write_sector)(
-        size_t sector_index, dengr_audio_sector_t sector, void* user_data
+        size_t sector_index,
+        dengr_audio_sector_t sector,
+        void* write_sector_data
     ),
-    void* user_data
+    void* write_sector_data
 );
 
 /*
