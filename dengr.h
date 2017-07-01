@@ -85,37 +85,6 @@ dengr_nanometre_t dengr_mm_to_nm(dengr_millimetre_t mm);
 dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
 
 /*
- * for a given full CD spec, a maximum number of points to plot (no limit set if
- * 0), a pointer to custom data of a user-defined type and a callback to a
- * function which receives each co-ordinate, index of point found and the custom
- * data pointer as arguments, find all the x-y co-ordinates of the CD and call
- * the given callback with each x-y co-ordinate found (and the user data too)
- * TODO: Remove this, no need to be public
- */
-void dengr_trace_cd_spiral(
-    dengr_cd_full_spec_t spec, size_t max_points,
-    void(* callback)(
-        dengr_co_ordinate_t co_ordinate,
-        size_t index,
-        void* user_data
-    ),
-    void* user_data
-);
-
-/*
- * for a given full CD spec, x-y co-ordinates of a point on a CD pertaining to
- * that CD spec and a bitmap image, find the image pixel which is located at the
- * given x-y co-ordinates if the image was mapped at a 1:1 ratio to the CD
- * program area
- * TODO: Remove this, no need to be public
- */
-dengr_pixel_t dengr_get_pixel_at_position(
-    dengr_cd_full_spec_t spec,
-    dengr_co_ordinate_t position,
-    dengr_bitmap_t image
-);
-
-/*
  * for a given full CD spec, an image to plot, a callback into which raw audio
  * data is sent and a pointer to custom data of a user-defined type, convert the
  * image to raw 16-bit signed PCM audio, which is written out through the write

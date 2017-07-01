@@ -39,6 +39,13 @@ static dengr_co_ordinate_t dengr_polar_to_cartesian(
     long double radius, long double angle
 );
 
+/*
+ * for a given full CD spec, a maximum number of points to plot (no limit set if
+ * 0), a pointer to custom data of a user-defined type and a callback to a
+ * function which receives each co-ordinate, index of point found and the custom
+ * data pointer as arguments, find all the x-y co-ordinates of the CD and call
+ * the given callback with each x-y co-ordinate found (and the user data too)
+ */
 void dengr_trace_cd_spiral(
     dengr_cd_full_spec_t spec, size_t max_points,
     void(* callback)(
@@ -87,6 +94,12 @@ void dengr_trace_cd_spiral(
     return;
 }
 
+/*
+ * for a given full CD spec, x-y co-ordinates of a point on a CD pertaining to
+ * that CD spec and a bitmap image, find the image pixel which is located at the
+ * given x-y co-ordinates if the image was mapped at a 1:1 ratio to the CD
+ * program area
+ */
 dengr_pixel_t dengr_get_pixel_at_position(
     dengr_cd_full_spec_t spec,
     dengr_co_ordinate_t position,
