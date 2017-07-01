@@ -11,6 +11,9 @@
 extern "C"{
 #endif
 
+// the number of audio bytes per-sector of red-book audio CDs
+#define DENGR_CDDA_SECTOR_SIZE 2352
+
 // millimetres type
 typedef int64_t dengr_millimetre_t;
 /*
@@ -61,8 +64,15 @@ typedef struct dengr_bitmap_t {
     dengr_pixel_t** pixels;
 } dengr_bitmap_t;
 
-// amount of bytes available for application use per sector in mode-2 CD-ROMS
-extern const size_t DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE;
+// one CD audio-sector's worth of pixels
+typedef struct dengr_pixel_sector_t {
+    dengr_pixel_t pixels[DENGR_CDDA_SECTOR_SIZE];
+} dengr_pixel_sector_t;
+
+// one CD audio sector's worth of audio bytes
+typedef struct dengr_audio_sector_t {
+    uint8_t data[DENGR_CDDA_SECTOR_SIZE];
+} dengr_audio_sector_t;
 
 // constants for the pixel colour values
 extern const dengr_pixel_t DENGR_PIXEL_BLACK;
@@ -80,6 +90,7 @@ dengr_cd_full_spec_t dengr_brief_spec_to_full_spec(dengr_cd_brief_spec_t brief);
  * function which receives each co-ordinate, index of point found and the custom
  * data pointer as arguments, find all the x-y co-ordinates of the CD and call
  * the given callback with each x-y co-ordinate found (and the user data too)
+ * TODO: Remove this, no need to be public
  */
 void dengr_trace_cd_spiral(
     dengr_cd_full_spec_t spec, size_t max_points,
@@ -96,6 +107,7 @@ void dengr_trace_cd_spiral(
  * that CD spec and a bitmap image, find the image pixel which is located at the
  * given x-y co-ordinates if the image was mapped at a 1:1 ratio to the CD
  * program area
+ * TODO: Remove this, no need to be public
  */
 dengr_pixel_t dengr_get_pixel_at_position(
     dengr_cd_full_spec_t spec,

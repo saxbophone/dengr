@@ -12,8 +12,6 @@
 extern "C"{
 #endif
 
-const size_t DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE = 2336;
-
 const dengr_pixel_t DENGR_PIXEL_BLACK = false;
 const dengr_pixel_t DENGR_PIXEL_WHITE = true;
 
@@ -120,7 +118,7 @@ static dengr_nanometre_t dengr_get_cd_track_length(
 }
 
 static size_t dengr_get_cd_capacity(dengr_cd_brief_spec_t brief) {
-    return brief.sector_count * DENGR_CDROM_MODE_2_SECTOR_DATA_SIZE;
+    return brief.sector_count * DENGR_CDDA_SECTOR_SIZE;
 }
 
 static dengr_co_ordinate_t dengr_polar_to_cartesian(
