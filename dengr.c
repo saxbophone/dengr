@@ -196,12 +196,12 @@ static dengr_pixel_t dengr_get_pixel_at_position(
 );
 
 /*
- * Reverses CIRC-encoding and the 'scrambling' systems defined in ECMA-130.
- * These operate on the whole sector at once. Reversing them means that the data
- * output from this function, if encoded with 'scrambling' and CIRC would yield
- * the data input to this function.
+ * Reverses CIRC-encoding as defined in ECMA-130 and IEC-908.
+ * This operates on whole frames of the sector at once.
+ * Reversing it means that the data output from this function, if encoded with
+ * CIRC would yield the data input to this function.
  */
-static dengr_audio_sector_t dengr_reverse_sector_encoding(
+static dengr_audio_sector_t dengr_reverse_circ_encoding(
     dengr_audio_sector_t sector
 );
 
@@ -229,7 +229,7 @@ static void dengr_co_ord_handler(
      */
     if(sector_index == (DENGR_CDDA_SECTOR_SIZE - 1)) {
         // reverse the CIRC encoding and 'scrambling' system
-        context->sector = dengr_reverse_sector_encoding(context->sector);
+        context->sector = dengr_reverse_circ_encoding(context->sector);
         // flush the data out to be written
         context->write_sector_callback(
             context->sector_count,
@@ -267,10 +267,11 @@ static dengr_pixel_t dengr_get_pixel_at_position(
     return image.pixels[x_index % image.width][y_index % image.height];
 }
 
-static dengr_audio_sector_t dengr_reverse_sector_encoding(
+static dengr_audio_sector_t dengr_reverse_circ_encoding(
     dengr_audio_sector_t sector
 ) {
     // TODO: Write actual implementation, this one just returns it as-is...
+    // NOTE: I have no idea right now on how to reverse CIRC encoding...
     return sector;
 }
 
