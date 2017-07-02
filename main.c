@@ -24,12 +24,12 @@ int main(void) {
             image.pixels[x][y] = image_pixels[x][y];
         }
     }
-    // a CD format with loads of assumptions about it being a 'standard CD-R'
+    // create CD format specifications
     dengr_cd_brief_spec_t cd_brief = {
         .track_pitch = 1500,
         .inner_radius = dengr_mm_to_nm(25),
         .outer_radius = dengr_mm_to_nm(58),
-        .sector_count = 360000, // number of sectors in 80-minute / 700MiB discs
+        .sector_count = 359849, // number of sectors on my CD-RW discs
     };
     // get full specs of CD format
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
