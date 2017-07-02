@@ -275,12 +275,44 @@ static dengr_audio_sector_t dengr_reverse_circ_encoding(
     return sector;
 }
 
+struct dengr_write_sector_to_file_data_t {
+    FILE* file_handle;
+};
+
+// callback for writing out audio sector data to a given file handle
+static void dengr_write_sector_to_file(
+    size_t sector_index,
+    dengr_audio_sector_t sector,
+    void* write_sector_data
+);
+
 void dengr_plot_image_to_audio_file(
     dengr_cd_brief_spec_t spec,
     dengr_bitmap_t image,
     FILE* output_file
 ) {
-    return;
+    struct dengr_write_sector_to_file_data_t write_sector_data = {
+        .file_handle = output_file,
+    };
+    dengr_plot_image_to_audio(
+        dengr_brief_spec_to_full_spec(spec),
+        image,
+        dengr_write_sector_to_file,
+        (void*)&write_sector_data
+    );
+}
+
+static void dengr_write_sector_to_file(
+    size_t sector_index,
+    dengr_audio_sector_t sector,
+    void* write_sector_data
+) {
+    // cast context data back to our struct type and dereference
+    struct dengr_write_sector_to_file_data_t* context = (
+        (struct dengr_write_sector_to_file_data_t*)write_sector_data
+    );
+    // write the data out to the given file handle
+    fwrite(sector.data, 1, DENGR_CDDA_SECTOR_SIZE, context->file_handle);
 }
 
 #ifdef __cplusplus

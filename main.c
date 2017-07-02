@@ -1,17 +1,10 @@
+#include <assert.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "dengr.h"
 
-
-static void write_sector(
-    size_t sector_index,
-    dengr_audio_sector_t sector,
-    void* write_sector_data
-) {
-    printf("Sector #%zu\n", sector_index);
-}
 
 int main(void) {
     // a 'chequered' image
@@ -42,7 +35,13 @@ int main(void) {
     dengr_cd_full_spec_t cd_specs = dengr_brief_spec_to_full_spec(cd_brief);
     printf("CD accessible data in bytes: %zu\n", cd_specs.capacity);
     printf("CD track length in nm: %" PRId64 "\n", cd_specs.track_length);
-    // convert image to audio
-    dengr_plot_image_to_audio(cd_specs, image, write_sector, NULL);
+    // open file for writing output to
+    FILE* file_handle = fopen("output.pcm", "wb");
+    // guard against error opening file
+    assert(file_handle != NULL);
+    // convert image to audio data and save to file
+    dengr_plot_image_to_audio_file(cd_brief, image, file_handle);
+    // close file
+    fclose(file_handle);
     return 0;
 }
