@@ -16,16 +16,16 @@ int main(int argc, char* argv[]) {
     int64_t track_pitch, inner_radius, outer_radius;
     size_t sector_count;
     // retrieve arguments
-    if(sscanf(argv[1], "%" SCNd64, &track_pitch) != 1) {
+    if(sscanf(argv[1], "%20" SCNd64, &track_pitch) != 1) {
         return 1;
     }
-    if(sscanf(argv[2], "%" SCNd64, &inner_radius) != 1) {
+    if(sscanf(argv[2], "%20" SCNd64, &inner_radius) != 1) {
         return 1;
     }
-    if(sscanf(argv[3], "%" SCNd64, &outer_radius) != 1) {
+    if(sscanf(argv[3], "%20" SCNd64, &outer_radius) != 1) {
         return 1;
     }
-    if(sscanf(argv[4], "%zu", &sector_count) != 1) {
+    if(sscanf(argv[4], "%20zu", &sector_count) != 1) {
         return 1;
     }
     char* output_file_name = argv[5];
