@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.0)
 project(dengr VERSION 0.0.0 LANGUAGES CXX)
 
 # set the C++ standard to use to C++20 always
-set(DENGR_CXX_STANDARD "20")
+set(DENGR_CXX_STANDARD "14")
 message(STATUS "[dengr] C++ Standard set to C++${DENGR_CXX_STANDARD}")
 set(CMAKE_CXX_STANDARD ${DENGR_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -79,7 +79,7 @@ endif()
 # C++ library source files
 file(GLOB DENGR_SOURCES "dengr/*.cpp")
 # C++ program source file
-file(DENGR_CLI_SOURCE "main.cpp")
+set(DENGR_CLI_SOURCE "main.cpp")
 # C++ source files for unit tests
 file(GLOB TEST_SOURCES "tests/*.cpp")
 # Header files
@@ -102,13 +102,11 @@ target_link_libraries(dengr-cli dengr)
 # set output name property so it will be called dengr despite target name being different
 set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
 
-# build unit tests if enabled
-if(BUILD_UNIT_TESTS)
-    add_executable(unit_tests ${TEST_SOURCES})
-    target_link_libraries(unit_tests dengr ${CHECK_LIBRARIES})
-    enable_testing()
-    add_test(unit_tests unit_tests)
-endif()
+# build unit tests
+add_executable(unit_tests ${TEST_SOURCES})
+target_link_libraries(unit_tests dengr)
+enable_testing()
+add_test(unit_tests unit_tests)
 
 install(
     TARGETS dengr
