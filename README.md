@@ -26,7 +26,7 @@ The overall process involves generating a disc image that when burned to a Compa
 4. Use physical dimensions to calculate total length of disc track (in nm or km)
 5. For each sector of data to generate:
     - For each byte in the sector:
-        - convert the byte offset to a physical offset as the number of nm along the spiral from it's origin point that the byte will be physically located on the disc.
+        - convert the byte offset to a physical offset as the number of nm along the spiral from it's origin point that the byte will be physically located on the disc. **NOTE:** _the spiral data track of optical discs is the involute of a circle, not an archimedean spiral._
         - get the x/y coördinates of this point in the spiral as mapped into Cartesian space.
         - sample the image to see which pixel this x/y point lies in and what colour that pixel is.
         - write out byte `0x30` if it is to be black, or `0xAB` if it is to be white (this handles the lower-most layer of encoding, which is EFM [eight-to-fourteen modulation])
