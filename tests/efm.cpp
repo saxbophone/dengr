@@ -305,23 +305,42 @@ SCENARIO("8-bit bytes can be converted to and from valid 14-bit EFM codewords") 
     }
 }
 
-SCENARIO("14-bit or 16-bit values which are not valid EFM codewords are refected by the EFM decoder") {
+SCENARIO("14-bit or 16-bit values which are not valid EFM codewords are rejected by the EFM decoder") {
     GIVEN("A 14-bit value that is not a valid EFM codeword") {
-        // TODO: add data
+        // table of invalid 14-bit values
+        uint16_t invalid_efm_value = GENERATE(
+            0b01010101010101,
+            0b10101010101010,
+            0b00000000000000,
+            0b11111111111111,
+            0b11100010010010,
+            0b00100100010101,
+            0b10100100100000
+        );
         WHEN("The EFM decoder is called with the 14-bit value as an argument") {
-            // TODO: add calling and result/exception capture
             THEN("An exception should be thrown") {
-                // TODO: Check the exception was thrown
+                // TODO: Change to REQUIRE_THROWS_AS() when exception is created
+                REQUIRE_THROWS(efm_decode(invalid_efm_value));
             }
         }
     }
 
     GIVEN("A 16-bit value based on a valid 14-bit EFM codeword with one or more higher bits set") {
-        // TODO: add data
+        // table of invalid 16-bit values extended from valid 14-bit values
+        uint16_t invalid_efm_value = GENERATE(
+            0b0100100000010000,
+            0b1000001001001000,
+            0b1110000100001001,
+            0b1001000000010010,
+            0b1010010010000100,
+            0b0101000100000000,
+            0b1010000100010001
+        );
         WHEN("The EFM decoder is called with the 16-bit value as an argument") {
             // TODO: add calling and result/exception capture
             THEN("An exception should be thrown") {
-                // TODO: Check the exception was thrown
+                // TODO: Change to REQUIRE_THROWS_AS() when exception is created
+                REQUIRE_THROWS(efm_decode(invalid_efm_value));
             }
         }
     }
