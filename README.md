@@ -29,7 +29,8 @@ The overall process involves generating a disc image that when burned to a Compa
         - convert the byte offset to a physical offset as the number of nm along the spiral from it's origin point that the byte will be physically located on the disc. **NOTE:** _the spiral data track of optical discs is the involute of a circle, not an archimedean spiral._
         - get the x/y coördinates of this point in the spiral as mapped into Cartesian space.
         - sample the image to see which pixel this x/y point lies in and what colour that pixel is.
-        - write out byte `0x30` if it is to be black, or `0xAB` if it is to be white (this handles the lower-most layer of encoding, which is EFM [eight-to-fourteen modulation])
+        - write out an EFM codeword that would produce "darkness" or "lightness" depending on what pixel shade is at that position
+    - Reverse the EFM encoding in the sector
     - Reverse-CIRC-encode the sector data (so that the result would produce the input sequence when CIRC encoding is applied to it).
     - Reverse-scramble the sector data according to ECMA-130 (so that the result would produce the input sequence when scrambling is applied to it).
     - Write out the raw resulting data to an image file.
