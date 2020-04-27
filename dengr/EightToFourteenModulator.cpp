@@ -12,6 +12,7 @@ namespace dengr {
 
     // XXX: stub implementation of EFM decoder for use until real one is made
     uint8_t EightToFourteenModulator::decode(uint16_t efm_codeword) {
+        // throw InvalidEFMCodewordException();
         return (uint8_t)efm_codeword;
     }
 }
