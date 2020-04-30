@@ -20,3 +20,5 @@ namespace dengr {
      */
     class Mode2Sector {};
 }
+
+#endif // include guard

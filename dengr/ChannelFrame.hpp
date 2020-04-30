@@ -13,3 +13,5 @@ namespace dengr {
      */
     class ChannelFrame {};
 }
+
+#endif // include guard

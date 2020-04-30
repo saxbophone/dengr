@@ -12,3 +12,5 @@ namespace dengr {
      */
     class Section {};
 }
+
+#endif // include guard

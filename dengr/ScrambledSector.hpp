@@ -13,3 +13,5 @@ namespace dengr {
      */
     class ScrambledSector {};
 }
+
+#endif // include guard

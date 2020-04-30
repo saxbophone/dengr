@@ -11,3 +11,5 @@ namespace dengr {
      */
     typedef std::uint8_t Byte;
 }
+
+#endif // include guard

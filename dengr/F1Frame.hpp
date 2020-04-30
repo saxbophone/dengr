@@ -13,3 +13,5 @@ namespace dengr {
      */
     class F1Frame {};
 }
+
+#endif // include guard

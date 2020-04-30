@@ -17,3 +17,5 @@ namespace dengr {
      */
     typedef std::uint8_t MergingBits;
 }
+
+#endif // include guard

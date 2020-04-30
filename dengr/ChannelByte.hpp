@@ -22,3 +22,5 @@ namespace dengr {
      */
     typedef std::uint16_t ChannelByte;
 }
+
+#endif // include guard
