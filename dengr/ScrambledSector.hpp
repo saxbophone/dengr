@@ -1,7 +1,6 @@
 #ifndef COM_SAXBOPHONE_DENGR_SCRAMBLED_SECTOR
 #define COM_SAXBOPHONE_DENGR_SCRAMBLED_SECTOR
 
-
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**

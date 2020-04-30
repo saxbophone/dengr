@@ -1,9 +1,6 @@
 #ifndef COM_SAXBOPHONE_DENGR_CHANNEL_FRAME
 #define COM_SAXBOPHONE_DENGR_CHANNEL_FRAME
 
-#include <cstdint>
-
-
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**

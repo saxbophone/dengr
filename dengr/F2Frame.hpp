@@ -1,7 +1,6 @@
 #ifndef COM_SAXBOPHONE_DENGR_F2_FRAME
 #define COM_SAXBOPHONE_DENGR_F2_FRAME
 
-
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**
