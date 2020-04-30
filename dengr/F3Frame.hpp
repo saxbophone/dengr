@@ -1,6 +1,10 @@
 #ifndef COM_SAXBOPHONE_DENGR_F3_FRAME
 #define COM_SAXBOPHONE_DENGR_F3_FRAME
 
+#include "Byte.hpp"
+#include "F2Frame.hpp"
+
+
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**
@@ -10,7 +14,13 @@ namespace dengr {
      * @details A group of 33 8-bit bytes, being an F2-Frame with a control
      * byte, and input to a 8-to-14 encoder.
      */
-    class F3Frame {};
+    struct F3Frame : public F2Frame {
+        /**
+         * @brief The Control Byte for this F₃-Frame
+         * @details Control Bytes are derived according to ECMA-130, sec. 22
+         */
+        Byte control_byte;
+    };
 }
 
 #endif // include guard

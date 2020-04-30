@@ -1,6 +1,11 @@
 #ifndef COM_SAXBOPHONE_DENGR_SECTION
 #define COM_SAXBOPHONE_DENGR_SECTION
 
+#include <array>
+
+#include "F3Frame.hpp"
+
+
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**
@@ -9,7 +14,12 @@ namespace dengr {
      * @details A group of 98 F3-Frames containing one complete table of Control
      * bytes.
      */
-    class Section {};
+    struct Section {
+        /**
+         * @brief The F₃-Frames that comprise this Section
+         */
+        std::array<F3Frame, 98> frames;
+    };
 }
 
 #endif // include guard

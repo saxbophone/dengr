@@ -1,6 +1,9 @@
 #ifndef COM_SAXBOPHONE_DENGR_SCRAMBLED_SECTOR
 #define COM_SAXBOPHONE_DENGR_SCRAMBLED_SECTOR
 
+#include "Mode2Sector.hpp"
+
+
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace dengr {
     /**
@@ -10,7 +13,7 @@ namespace dengr {
      * what their Mode is.
      * @remarks Reference: ECMA-130, sec. 15
      */
-    class ScrambledSector {};
+    struct ScrambledSector : public Mode2Sector {};
 }
 
 #endif // include guard
