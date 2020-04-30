@@ -10,7 +10,7 @@
 namespace dengr {
     /**
      * @brief A group of 98 consecutive F₃-Frames
-     * @details Definition from @eECMA-130, sec. 4.13:
+     * @details Definition from @e ECMA-130, sec. 4.13:
      * @details A group of 98 F3-Frames containing one complete table of Control
      * bytes.
      */

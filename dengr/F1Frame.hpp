@@ -11,7 +11,7 @@ namespace dengr {
     /**
      * @brief One F₁-Frame consisting of the re-arranged bytes of one part of a
      * Scrambled Sector
-     * @details Definition from @eECMA-130, sec. 4.5:
+     * @details Definition from @e ECMA-130, sec. 4.5:
      * @details A group of 24 8-bit bytes, being the output of a scrambler and
      * input to a CIRC encoder.
      */

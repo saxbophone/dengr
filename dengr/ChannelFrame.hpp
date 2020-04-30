@@ -14,7 +14,7 @@ namespace dengr {
     /**
      * @brief One Channel Frame consisting of an F₃-Frame converted to 14-bit
      * Bytes (Channel Bytes) and with additional fields added.
-     * @details See @eECMA-130, sec 19.4 for more information.
+     * @details See @e ECMA-130, sec 19.4 for more information.
      * @note Bitfields are used extensively in this type. These serve primarily
      * as a documentation aid rather than to promote efficient data packing. At
      * this level, the bit-length of the fields are very specific in ECMA-130.

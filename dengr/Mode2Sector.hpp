@@ -15,7 +15,7 @@ namespace dengr {
      * User Data section, but the Sync and Header sections as well, which we can
      * set to whatever we like as this library is designed for writing images to
      * disc in RAW mode.
-     * @details Definition from @eECMA-130, sec. 4.14:
+     * @details Definition from @e ECMA-130, sec. 4.14:
      * @details The smallest addressable part of a Digital Data Track in the
      * information area that can be accessed independently of other addressable
      * parts of the area.
