@@ -6,7 +6,7 @@
 namespace dengr {
     /**
      * @brief One chunk of user data to be encoded and written to disc
-     * @note This is a RAW CD-ROM Mode 2 Sector consisting of 2352 bytes
+     * @note This is a RAW CD-ROM Mode 2 Sector consisting of 2352 Bytes
      * (see ECMA-130 sec. 14). As it is in RAW format, it includes not only the
      * User Data section, but the Sync and Header sections as well, which we can
      * set to whatever we like as this library is designed for writing images to
