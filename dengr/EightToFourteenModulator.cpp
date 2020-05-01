@@ -1,13 +1,13 @@
 #include <array>
 #include <map>
 
-#include <cstdint>
-
+#include "Byte.hpp"
+#include "ChannelByte.hpp"
 #include "EightToFourteenModulator.hpp"
 
 
 namespace com::saxbophone::dengr {
-    uint16_t EightToFourteenModulator::encode(uint8_t byte) {
+    ChannelByte EightToFourteenModulator::encode(Byte byte) {
         /*
          * NOTE: no need to use the bounds-checking interface of std::array here
          * as we can guarantee the array is big enough to handle all accesses
@@ -18,7 +18,7 @@ namespace com::saxbophone::dengr {
         return EightToFourteenModulator::ENCODING_TABLE[byte];
     }
 
-    uint8_t EightToFourteenModulator::decode(uint16_t efm_codeword) {
+    Byte EightToFourteenModulator::decode(ChannelByte efm_codeword) {
         // check that the given value is a valid efm codeword
         // TODO: Change to use .contains() for C++20
         if (EightToFourteenModulator::DECODING_TABLE.count(efm_codeword) == 0) {
@@ -28,7 +28,7 @@ namespace com::saxbophone::dengr {
         return EightToFourteenModulator::DECODING_TABLE.at(efm_codeword);
     }
 
-    const std::array<uint16_t, 256> EightToFourteenModulator::ENCODING_TABLE = {
+    const std::array<ChannelByte, 256> EightToFourteenModulator::ENCODING_TABLE = {
         0b01001000100000,
         0b10000100000000,
         0b10010000100000,
@@ -287,7 +287,7 @@ namespace com::saxbophone::dengr {
         0b00100000010010,
     };
 
-    const std::map<uint16_t, uint8_t> EightToFourteenModulator::DECODING_TABLE = {
+    const std::map<ChannelByte, Byte> EightToFourteenModulator::DECODING_TABLE = {
         {0b01001000100000, 0b00000000},
         {0b01001000100100, 0b01000000},
         {0b10000100000000, 0b00000001},

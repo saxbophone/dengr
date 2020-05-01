@@ -5,7 +5,8 @@
 #include <exception>
 #include <map>
 
-#include <cstdint>
+#include "Byte.hpp"
+#include "ChannelByte.hpp"
 
 
 namespace com::saxbophone::dengr {
@@ -30,7 +31,7 @@ namespace com::saxbophone::dengr {
          * @param byte the 8-bit byte to encode into EFM
          * @returns 14-bit EFM codeword for the given 8-bit input byte
          */
-        static uint16_t encode(uint8_t byte);
+        static ChannelByte encode(Byte byte);
 
         /**
          * @brief Decodes valid 14-bit EFM codewords into 8-bit bytes
@@ -39,18 +40,18 @@ namespace com::saxbophone::dengr {
          * @throws InvalidEFMCodewordException if efm_codeword is not a valid
          * 14-bit EFM codeword
          */
-        static uint8_t decode(uint16_t efm_codeword);
+        static Byte decode(ChannelByte efm_codeword);
 
     private:
         /**
          * @brief Lookup table used to encode 8-bit bytes into 14-bit EFM codes
          */
-        static const std::array<uint16_t, 256> ENCODING_TABLE;
+        static const std::array<ChannelByte, 256> ENCODING_TABLE;
         /**
          * @brief Lookup table used to decode 14-bit EFM codes back into 8-bit
          * bytes
          */
-        static const std::map<uint16_t, uint8_t> DECODING_TABLE;
+        static const std::map<ChannelByte, Byte> DECODING_TABLE;
     };
 }
 
