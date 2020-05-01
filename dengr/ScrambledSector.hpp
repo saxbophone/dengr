@@ -4,8 +4,7 @@
 #include "Mode2Sector.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief A CD-ROM Sector that has been scrambled by the ECMA-130 Annex B
      * Scrambler.

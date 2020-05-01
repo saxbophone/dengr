@@ -8,8 +8,7 @@
 #include <cstdint>
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief Thrown when attempting to decode a value that is not an EFM code.
      */

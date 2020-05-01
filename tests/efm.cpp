@@ -7,7 +7,7 @@
 #include "../dengr/EightToFourteenModulator.hpp"
 
 
-using namespace dengr;
+using namespace com::saxbophone::dengr;
 
 SCENARIO("8-bit bytes can be converted to and from valid 14-bit EFM codewords") {
     GIVEN("An 8-bit byte and its corresponding 14-bit EFM codeword") {

@@ -6,8 +6,7 @@
 #include "Byte.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief One F₂-Frame consisting of the CIRC-encoded bytes of an F₁-Frame
      * @details Definition from @e ECMA-130, sec. 4.6:

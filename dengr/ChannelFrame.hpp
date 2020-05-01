@@ -9,8 +9,7 @@
 #include "MergingBits.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief One Channel Frame consisting of an F₃-Frame converted to 14-bit
      * Bytes (Channel Bytes) and with additional fields added.

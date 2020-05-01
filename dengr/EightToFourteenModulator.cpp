@@ -6,8 +6,7 @@
 #include "EightToFourteenModulator.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     uint16_t EightToFourteenModulator::encode(uint8_t byte) {
         /*
          * NOTE: no need to use the bounds-checking interface of std::array here

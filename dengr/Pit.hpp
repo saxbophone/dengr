@@ -2,7 +2,7 @@
 #define COM_SAXBOPHONE_DENGR_PIT
 
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief A single Pit or Land on the physical reflective layer of the disc
      * @remarks This represents the NRZI-encoded version of the sequence of

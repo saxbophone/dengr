@@ -4,8 +4,7 @@
 #include <cstdint>
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief An 8-bit Byte, the input format of User data that goes in a Sector
      */

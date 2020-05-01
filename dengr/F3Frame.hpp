@@ -5,8 +5,7 @@
 #include "F2Frame.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief One F₃-Frame consisting of the an F₂-Frame with a Control byte
      * prepended

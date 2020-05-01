@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.0)
 project(dengr VERSION 0.0.0 LANGUAGES CXX)
 
 # set the C++ standard to use to C++20 always
-set(DENGR_CXX_STANDARD "17")
+set(DENGR_CXX_STANDARD "20")
 message(STATUS "[dengr] C++ Standard set to C++${DENGR_CXX_STANDARD}")
 set(CMAKE_CXX_STANDARD ${DENGR_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

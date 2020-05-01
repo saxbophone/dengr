@@ -6,8 +6,7 @@
 #include "Byte.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief One chunk of user data to be encoded and written to disc
      * @note This is a RAW CD-ROM Mode 2 Sector consisting of 2352 Bytes

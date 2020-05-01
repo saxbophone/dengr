@@ -5,7 +5,7 @@
 
 
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief A sequence of 3 Channel bits delimiting each part of a Channel
      * Frame to prevent encoding issues.

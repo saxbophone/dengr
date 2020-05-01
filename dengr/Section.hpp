@@ -6,8 +6,7 @@
 #include "F3Frame.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief A group of 98 consecutive F₃-Frames
      * @details Definition from @e ECMA-130, sec. 4.13:

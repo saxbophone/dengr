@@ -6,8 +6,7 @@
 #include "Byte.hpp"
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
-namespace dengr {
+namespace com::saxbophone::dengr {
     /**
      * @brief One F₁-Frame consisting of the re-arranged bytes of one part of a
      * Scrambled Sector
