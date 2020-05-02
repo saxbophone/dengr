@@ -10,7 +10,7 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
     /**
      * @brief Lookup table used to encode 8-bit bytes into 14-bit EFM codes
      */
-    const std::array<ChannelByte, 256> ENCODING_TABLE = {
+    static const std::array<ChannelByte, 256> ENCODING_TABLE = {
         0b01001000100000,
         0b10000100000000,
         0b10010000100000,
@@ -273,7 +273,7 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
      * @brief Lookup table used to decode 14-bit EFM codes back into 8-bit
      * bytes
      */
-    const std::map<ChannelByte, Byte> DECODING_TABLE = {
+    static const std::map<ChannelByte, Byte> DECODING_TABLE = {
         {0b01001000100000, 0b00000000},
         {0b01001000100100, 0b01000000},
         {0b10000100000000, 0b00000001},
