@@ -545,8 +545,7 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
 
     Byte decode(ChannelByte efm_codeword) {
         // check that the given value is a valid efm codeword
-        // TODO: Change to use .contains() for C++20
-        if (DECODING_TABLE.count(efm_codeword) == 0) {
+        if (not DECODING_TABLE.contains(efm_codeword)) {
             throw InvalidEFMCodewordException();
         }
         // otherwise, we know it is a valid one so we can retrieve it
