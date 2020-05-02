@@ -23,8 +23,9 @@ namespace com::saxbophone::dengr {
          * @note This is always a fixed value.
          * @details As per ECMA-130, sec 19.2, this shall always be following:
          * `100000000001000000000010`
+         * @warn This is a 24-bit value.
          */
-        const std::uint32_t sync_header : 24;
+        static const std::uint32_t SYNC_HEADER;
         /**
          * @brief Merging Bits to separate the Sync Header and the Control Byte
          */
