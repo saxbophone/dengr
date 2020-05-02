@@ -1,34 +1,16 @@
 #include <array>
-#include <map>
+#include <unordered_map>
 
 #include "Byte.hpp"
 #include "ChannelByte.hpp"
-#include "EightToFourteenModulator.hpp"
+#include "eight_to_fourteen.hpp"
 
 
-namespace com::saxbophone::dengr {
-    ChannelByte EightToFourteenModulator::encode(Byte byte) {
-        /*
-         * NOTE: no need to use the bounds-checking interface of std::array here
-         * as we can guarantee the array is big enough to handle all accesses
-         * (byte is used as index)
-         * HOWEVER, if byte was not 8-bit, we couldn't guarantee that an out of
-         * bounds index would be passed.
-         */
-        return EightToFourteenModulator::ENCODING_TABLE[byte];
-    }
-
-    Byte EightToFourteenModulator::decode(ChannelByte efm_codeword) {
-        // check that the given value is a valid efm codeword
-        // TODO: Change to use .contains() for C++20
-        if (EightToFourteenModulator::DECODING_TABLE.count(efm_codeword) == 0) {
-            throw InvalidEFMCodewordException();
-        }
-        // otherwise, we know it is a valid one so we can retrieve it
-        return EightToFourteenModulator::DECODING_TABLE.at(efm_codeword);
-    }
-
-    const std::array<ChannelByte, 256> EightToFourteenModulator::ENCODING_TABLE = {
+namespace com::saxbophone::dengr::eight_to_fourteen {
+    /**
+     * @brief Lookup table used to encode 8-bit bytes into 14-bit EFM codes
+     */
+    static const std::array<ChannelByte, 256> ENCODING_TABLE = {
         0b01001000100000,
         0b10000100000000,
         0b10010000100000,
@@ -287,7 +269,11 @@ namespace com::saxbophone::dengr {
         0b00100000010010,
     };
 
-    const std::map<ChannelByte, Byte> EightToFourteenModulator::DECODING_TABLE = {
+    /**
+     * @brief Lookup table used to decode 14-bit EFM codes back into 8-bit
+     * bytes
+     */
+    static const std::unordered_map<ChannelByte, Byte> DECODING_TABLE = {
         {0b01001000100000, 0b00000000},
         {0b01001000100100, 0b01000000},
         {0b10000100000000, 0b00000001},
@@ -545,4 +531,24 @@ namespace com::saxbophone::dengr {
         {0b00100000001001, 0b10111111},
         {0b00100000010010, 0b11111111},
     };
+
+    ChannelByte encode(Byte byte) {
+        /*
+         * NOTE: no need to use the bounds-checking interface of std::array here
+         * as we can guarantee the array is big enough to handle all accesses
+         * (byte is used as index)
+         * HOWEVER, if byte was not 8-bit, we couldn't guarantee that an out of
+         * bounds index would be passed.
+         */
+        return ENCODING_TABLE[byte];
+    }
+
+    Byte decode(ChannelByte efm_codeword) {
+        // check that the given value is a valid efm codeword
+        if (not DECODING_TABLE.contains(efm_codeword)) {
+            throw InvalidEFMCodewordException();
+        }
+        // otherwise, we know it is a valid one so we can retrieve it
+        return DECODING_TABLE.at(efm_codeword);
+    }
 }

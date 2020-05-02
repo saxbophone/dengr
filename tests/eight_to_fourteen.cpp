@@ -4,10 +4,11 @@
 
 #include "../dengr/Byte.hpp"
 #include "../dengr/ChannelByte.hpp"
-#include "../dengr/EightToFourteenModulator.hpp"
+#include "../dengr/eight_to_fourteen.hpp"
 
 
 using namespace com::saxbophone::dengr;
+using namespace com::saxbophone::dengr::eight_to_fourteen;
 
 SCENARIO("8-bit bytes can be converted to and from valid 14-bit EFM codewords") {
     GIVEN("An 8-bit byte and its corresponding 14-bit EFM codeword") {
@@ -279,7 +280,7 @@ SCENARIO("8-bit bytes can be converted to and from valid 14-bit EFM codewords") 
         WHEN("The EFM encoder is called with the 8-bit byte as an argument") {
             Byte input = valid_efm_code_pair.first;
             ChannelByte expected_output = valid_efm_code_pair.second;
-            ChannelByte output = EightToFourteenModulator::encode(input);
+            ChannelByte output = eight_to_fourteen::encode(input);
             THEN("The EFM encoder should return the corresponding 14-bit EFM codeword") {
                 REQUIRE(output == expected_output);
             }
@@ -288,7 +289,7 @@ SCENARIO("8-bit bytes can be converted to and from valid 14-bit EFM codewords") 
         WHEN("The EFM decoder is called with the 14-bit EFM codeword as an argument") {
             ChannelByte input = valid_efm_code_pair.second;
             Byte expected_output = valid_efm_code_pair.first;
-            Byte output = EightToFourteenModulator::decode(input);
+            Byte output = eight_to_fourteen::decode(input);
             THEN("The EFM decoder should return the corresponding 8-bit byte") {
                 REQUIRE(output == expected_output);
             }
@@ -311,7 +312,7 @@ SCENARIO("14-bit or 16-bit values which are not valid EFM codewords are rejected
         WHEN("The EFM decoder is called with the 14-bit value as an argument") {
             THEN("An exception should be thrown") {
                 // TODO: Change to REQUIRE_THROWS_AS() when exception is created
-                REQUIRE_THROWS_AS(EightToFourteenModulator::decode(invalid_efm_value), InvalidEFMCodewordException);
+                REQUIRE_THROWS_AS(eight_to_fourteen::decode(invalid_efm_value), InvalidEFMCodewordException);
             }
         }
     }
@@ -331,7 +332,7 @@ SCENARIO("14-bit or 16-bit values which are not valid EFM codewords are rejected
             // TODO: add calling and result/exception capture
             THEN("An exception should be thrown") {
                 // TODO: Change to REQUIRE_THROWS_AS() when exception is created
-                REQUIRE_THROWS_AS(EightToFourteenModulator::decode(invalid_efm_value), InvalidEFMCodewordException);
+                REQUIRE_THROWS_AS(eight_to_fourteen::decode(invalid_efm_value), InvalidEFMCodewordException);
             }
         }
     }
