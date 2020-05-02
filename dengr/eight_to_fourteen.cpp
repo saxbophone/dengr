@@ -1,5 +1,5 @@
 #include <array>
-#include <map>
+#include <unordered_map>
 
 #include "Byte.hpp"
 #include "ChannelByte.hpp"
@@ -273,7 +273,7 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
      * @brief Lookup table used to decode 14-bit EFM codes back into 8-bit
      * bytes
      */
-    static const std::map<ChannelByte, Byte> DECODING_TABLE = {
+    static const std::unordered_map<ChannelByte, Byte> DECODING_TABLE = {
         {0b01001000100000, 0b00000000},
         {0b01001000100100, 0b01000000},
         {0b10000100000000, 0b00000001},
