@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 
 #include "../vendor/catch.hpp"
@@ -13,16 +14,17 @@ using namespace com::saxbophone::dengr;
 using namespace com::saxbophone::dengr::scrambling;
 
 SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
-    int file_number = GENERATE(range(1, 10));
+    int file_number = GENERATE(range(1, 11));
     // load each input and output data file, reading in their contents
     std::ifstream input_file, output_file;
     std::stringstream input_name, output_name;
-    input_name << "scrambling_test_fixtures/test_"
+    input_name << "../tests/scrambling_test_fixtures/test_"
                << std::setfill('0') << std::setw(2)
                << file_number << "_input.bin";
-    output_name << "scrambling_test_fixtures/test_"
+    output_name << "../tests/scrambling_test_fixtures/test_"
                << std::setfill('0') << std::setw(2)
                << file_number << "_output.bin";
+    std::cout << input_name.str() << " " << output_name.str() << std::endl;
     // try and open both files
     input_file.open(
         // C++20 code currently lacking library support:
@@ -30,7 +32,7 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
         //     "scrambling_test_fixtures/test_{0:02}_input.bin", file_number
         // ),
         input_name.str(),
-        std::ios::in | std::ios::binary
+        std::ios::binary
     );
     output_file.open(
         // C++20 code currently lacking library support:
@@ -38,8 +40,10 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
         //     "scrambling_test_fixtures/test_{0:02}_output.bin", file_number
         // ),
         output_name.str(),
-        std::ios::in | std::ios::binary
+        std::ios::binary
     );
+    REQUIRE(input_file.is_open());
+    REQUIRE(output_file.is_open());
     Mode2Sector raw_sector;
     ScrambledSector scrambled_sector;
     // try and read them both into the corresponding data structures
