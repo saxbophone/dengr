@@ -22,6 +22,14 @@ namespace {
             /*
              * this algorithm is based on that used in joshua_saxby_scrambler()
              * within the Python script 'ecma_130_annex_b_scrambler.py'
+             *
+             * That algorithm respectively is based partly on commentary
+             * and analysis from Kris Kaspersky's book, "CD Cracking Uncovered:
+             * Protection against unsanctioned copying", and also based on my
+             * interpretation of the ECMA-130 Annex B scrambler description.
+             *
+             * This implementation may be slightly less efficient than Kris' but
+             * it is inherently more readable.
              */
             // 16-bit shift register as specified in the standard
             std::uint16_t shift_register = 0b1000000000000001;
