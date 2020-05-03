@@ -12,6 +12,8 @@ namespace {
     using namespace com::saxbophone::dengr;
 
     // internal-only helper class, provides lookup table computed on construction
+    // TODO: make constexpr once I get a G++10 compiler installed
+    // https://stackoverflow.com/questions/59662404/legitimate-to-initialize-an-array-in-a-constexpr-constructor
     class ScramblerLookupTable {
     public:
         /*
