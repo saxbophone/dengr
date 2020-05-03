@@ -85,7 +85,10 @@ namespace {
 }
 
 namespace com::saxbophone::dengr::scrambling {
-    // this is the single lookup table instance for scrambling
+    /*
+     * this is the single lookup table instance for scrambling
+     * it is initialised at load-time
+     */
     static const ScramblerLookupTable LOOKUP_TABLE;
 
     ScrambledSector scramble(Mode2Sector raw_sector) {
