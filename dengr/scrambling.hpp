@@ -1,10 +1,6 @@
 #ifndef COM_SAXBOPHONE_DENGR_SCRAMBLING
 #define COM_SAXBOPHONE_DENGR_SCRAMBLING
 
-#include <array>
-#include <exception>
-#include <map>
-
 #include "Mode2Sector.hpp"
 #include "ScrambledSector.hpp"
 
