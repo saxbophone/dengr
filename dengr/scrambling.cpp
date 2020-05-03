@@ -9,4 +9,10 @@ namespace com::saxbophone::dengr::scrambling {
         scrambled_sector.bytes = raw_sector.bytes;
         return scrambled_sector;
     }
+
+    Mode2Sector unscramble(ScrambledSector scrambled_sector) {
+        Mode2Sector unscrambled_sector;
+        unscrambled_sector.bytes = scrambled_sector.bytes;
+        return unscrambled_sector;
+    }
 }

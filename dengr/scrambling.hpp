@@ -15,6 +15,8 @@
  */
 namespace com::saxbophone::dengr::scrambling {
     ScrambledSector scramble(Mode2Sector raw_sector);
+
+    Mode2Sector unscramble(ScrambledSector scrambled_sector);
 }
 
 #endif // include guard
