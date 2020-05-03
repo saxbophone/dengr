@@ -65,4 +65,14 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
             }
         }
     }
+
+    GIVEN("A scrambled input Sector and its expected output unscrambled Sector") {
+        WHEN("The input Sector is passed into the unscrambler") {
+            // attempt to unscramble the input Sector
+            Mode2Sector unscrambled = scrambling::unscramble(scrambled_sector);
+            THEN("An un-Scrambled Sector shall be returned with same contents as expected output") {
+                REQUIRE(unscrambled.bytes == raw_sector.bytes);
+            }
+        }
+    }
 }
