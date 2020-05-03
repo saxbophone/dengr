@@ -1,6 +1,5 @@
 #include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 
 #include "../vendor/catch.hpp"
@@ -24,7 +23,6 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
     output_name << "../tests/scrambling_test_fixtures/test_"
                << std::setfill('0') << std::setw(2)
                << file_number << "_output.bin";
-    std::cout << input_name.str() << " " << output_name.str() << std::endl;
     // try and open both files
     input_file.open(
         // C++20 code currently lacking library support:
