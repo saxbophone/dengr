@@ -123,7 +123,7 @@ SCRAMBLE_TABLE = [
 
 
 for n in range(1, COUNT_FILES + 1):
-    with open('scrambler_test_fixtures/test_{0:02}_input.bin'.format(n), 'wb') as input_file, open('scrambler_test_fixtures/test_{0:02}_output.bin'.format(n), 'wb') as output_file:
+    with open('scrambling_test_fixtures/test_{0:02}_input.bin'.format(n), 'wb') as input_file, open('scrambling_test_fixtures/test_{0:02}_output.bin'.format(n), 'wb') as output_file:
         # generate random sector bytes, put them verbatim in the input file and scrambled in the output file
         # the first 12 bytes are never scrambled (ECMA-130, sec. 15)
         for _ in range(12):
