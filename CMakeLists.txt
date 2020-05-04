@@ -51,10 +51,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
     enable_cxx_compiler_flag_if_supported("-pedantic")
     # enable 'extra' strict warnings
     enable_cxx_compiler_flag_if_supported("-Wextra")
-    # enable enforcing of strict function prototypes (e.g. no empty parentheses)
-    enable_cxx_compiler_flag_if_supported("-Wstrict-prototypes")
-    # enable warnings on missing prototypes of global functions
-    enable_cxx_compiler_flag_if_supported("-Wmissing-prototypes")
     # enable sign and type conversion warnings
     enable_cxx_compiler_flag_if_supported("-Wsign-conversion")
     # enable warnings about mistakes in Doxygen documentation

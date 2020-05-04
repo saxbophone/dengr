@@ -11,16 +11,23 @@
 namespace {
     using namespace com::saxbophone::dengr;
 
-    // internal-only helper class, provides lookup table computed on construction
-    // TODO: make constexpr once I get a G++10 compiler installed
-    // https://stackoverflow.com/questions/59662404/legitimate-to-initialize-an-array-in-a-constexpr-constructor
+    /**
+     * internal-only helper class, provides lookup table computed on construction
+     * WARN: The constexpr initialisation in the constructor relies on new
+     * features in the C++20 standard revision, which are only supported by
+     * pre-releases of the bleeding-edge GCC-10 compiler toolchain. This allows
+     * the constructor (and hence, the lookup table) to be evaluated at compile
+     * time, which is really handy as the table sequence, while unwieldily
+     * generated, is a deterministic sequence. This allows us to keep the best
+     * of both worlds, efficiency of execution and human-readability of the code
+     */
     class ScramblerLookupTable {
     public:
         /*
          * this is the default constructor. it computes the scrambling table
          * according to ECMA-130, Annex B.
          */
-        ScramblerLookupTable() {
+        constexpr ScramblerLookupTable() {
             /*
              * this algorithm is based on that used in joshua_saxby_scrambler()
              * within the Python script 'ecma_130_annex_b_scrambler.py'
@@ -97,9 +104,11 @@ namespace {
 namespace com::saxbophone::dengr::scrambling {
     /*
      * this is the single lookup table instance for scrambling
-     * it is initialised at load-time
+     * it is initialised at compile-time (forced by the constexpr qualifier,
+     * although even without the qualifier, it probably would be initialised at
+     * compile time but this is not required).
      */
-    static const ScramblerLookupTable LOOKUP_TABLE;
+    static constexpr ScramblerLookupTable LOOKUP_TABLE;
 
     ScrambledSector scramble(Mode2Sector raw_sector) {
         ScrambledSector scrambled_sector;
