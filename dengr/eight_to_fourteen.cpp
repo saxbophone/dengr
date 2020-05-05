@@ -56,6 +56,11 @@ namespace {
         }
 
     private:
+        /**
+         * the lookup table itself. This has 16384 positions as this is 2 ^ 14
+         * we need this many positions to properly map the 14-bit EFM codeword
+         * values
+         */
         std::array<PresentByte, 16384> lookup_table;
     };
 }
