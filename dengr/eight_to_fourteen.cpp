@@ -49,10 +49,16 @@ namespace {
 
         /*
          * overloaded [] operator allows access of the lookup table
-         * Don't call it with out-of-bounds indexes.
+         * When called with out-of-bounds indexes, it returns a 'null'
+         * PresentByte
          */
         const PresentByte& operator[](std::size_t i) const {
-            return this->lookup_table[i];
+            /*
+             * in this case, element #0 is our 'null' element since we know it's
+             * empty, as EFM bit pattern 0 is not valid
+             */
+            return i < this->lookup_table.size() ? this->lookup_table[i]
+                                                 : this->lookup_table[0];
         }
 
     private:
