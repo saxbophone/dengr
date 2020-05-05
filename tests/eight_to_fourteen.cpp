@@ -317,16 +317,13 @@ SCENARIO("14-bit or 16-bit values which are not valid EFM codewords are rejected
         }
     }
 
-    GIVEN("A 16-bit value based on a valid 14-bit EFM codeword with one or more higher bits set") {
-        // table of invalid 16-bit values extended from valid 14-bit values
+    GIVEN("A 16-bit value with at least one of its highest two bits set") {
+        // a list of ALL of the 16-bit values with either of 2 MSB set
         ChannelByte invalid_efm_value = GENERATE(
-            0b0100100000010000,
-            0b1000001001001000,
-            0b1110000100001001,
-            0b1001000000010010,
-            0b1010010010000100,
-            0b0101000100000000,
-            0b1010000100010001
+            range(
+                0b0100000000000000,
+                0b1100000000000000 + 1 // range() is exclusive on the upper bound
+            )
         );
         WHEN("The EFM decoder is called with the 16-bit value as an argument") {
             // TODO: add calling and result/exception capture
