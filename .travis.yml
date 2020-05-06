@@ -2,6 +2,10 @@ dist: bionic # this is the most recent Ubuntu image available
 language: cpp
 cache: ccache
 matrix:
+  allow_failures:
+    # It looks like the macOS C++ stdlib doesn't allow using std::array as a constexpr
+    # As a result, it's currently not possible to build the code on macOS
+    - os: osx
   include:
     # GCC 10 on Linux
     - os: linux
