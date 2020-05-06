@@ -1,0 +1,32 @@
+dist: bionic # this is the most recent Ubuntu image available
+language: cpp
+matrix:
+  include:
+    # GCC 10 on Linux
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-10
+      env:
+        - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
+    # Clang 10 on Linux
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-bionic-10
+          packages:
+            - clang-10
+      env:
+        - MATRIX_EVAL="CC=clang-10 && CXX=clang++-10"
+before_install:
+  - eval "${MATRIX_EVAL}"
+before_script:
+  - cmake .
+script:
+  - make -j -k
+  - ./unit_tests
