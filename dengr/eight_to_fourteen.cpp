@@ -57,7 +57,7 @@ namespace {
          * read from to construct the decoder lookup table
          */
         constexpr DecoderLookupTable(
-            const std::array<ChannelByte, 256> encoding_table
+            const ChannelByte encoding_table[256]
         ) {
             // construct decode table from inverse of encode table
             for (std::size_t i = 0; i < 256; i++) {
@@ -77,8 +77,8 @@ namespace {
              * in this case, element #0 is our 'null' element since we know it's
              * empty, as EFM bit pattern 0 is not valid
              */
-            return i < this->lookup_table.size() ? this->lookup_table[i]
-                                                 : this->lookup_table[0];
+            return i < 16384 ? this->lookup_table[i]
+                             : this->lookup_table[0];
         }
 
     private:
@@ -87,7 +87,7 @@ namespace {
          * we need this many positions to properly map the 14-bit EFM codeword
          * values
          */
-        std::array<PresentByte, 16384> lookup_table;
+        PresentByte lookup_table[16384];
     };
 }
 
@@ -95,7 +95,7 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
     /**
      * @brief Lookup table used to encode 8-bit bytes into 14-bit EFM codes
      */
-    static constexpr std::array<ChannelByte, 256> ENCODING_TABLE = {
+    static constexpr ChannelByte ENCODING_TABLE[256] = {
         0b01001000100000,
         0b10000100000000,
         0b10010000100000,

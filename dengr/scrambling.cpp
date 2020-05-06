@@ -117,7 +117,7 @@ namespace {
          * the lookup table has 2340 bytes because first twelve sector bytes
          * are not scrambled
          */
-        std::array<Byte, 2340> lookup_table;
+        Byte lookup_table[2340];
     };
 }
 
