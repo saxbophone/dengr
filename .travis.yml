@@ -26,7 +26,8 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-  - cmake .
+  - cd build
+  - cmake ..
 script:
   - make -j -k
   - ./unit_tests
