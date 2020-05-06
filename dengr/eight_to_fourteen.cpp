@@ -37,6 +37,11 @@ namespace {
      * table to be generated at compile-time).
      */
     struct PresentByte {
+        // default constructor to allow zero-initialiser usage in array
+        constexpr PresentByte()
+          : is_present(false)
+          , value(0)
+          {}
         bool is_present; // if false, consider this value to be 'null'
         Byte value; // the value stored, to be ignored if is_present is false
     };
@@ -58,7 +63,9 @@ namespace {
          */
         constexpr DecoderLookupTable(
             const ChannelByte encoding_table[256]
-        ) {
+        )
+          : lookup_table()// zero-initialise
+          {
             // construct decode table from inverse of encode table
             for (std::size_t i = 0; i < 256; i++) {
                 // all zero-initialised elements will have is_present set to false
