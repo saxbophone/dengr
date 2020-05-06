@@ -17,6 +17,7 @@ matrix:
     - os: linux
       addons:
         apt:
+          update: true
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-bionic-10
@@ -25,6 +26,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-10 && CXX=clang++-10"
 before_install:
+  - if [ "$CXX" == "clang++-10" ]; then sudo apt-get -y install clang-10; fi
   - eval "${MATRIX_EVAL}"
 before_script:
   - cd build
