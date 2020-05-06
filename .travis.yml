@@ -1,5 +1,6 @@
 dist: bionic # this is the most recent Ubuntu image available
 language: cpp
+cache: ccache
 matrix:
   include:
     # GCC 10 on Linux
