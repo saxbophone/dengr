@@ -20,12 +20,10 @@ matrix:
           update: true
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-bionic-10
-          packages:
-            - clang-10
       env:
-        - MATRIX_EVAL="CC=clang-10 && CXX=clang++-10"
+        - MATRIX_EVAL="CXX=clang++-10"
 before_install:
+  - if [ "$CXX" == "clang++-10" ]; then sudo add-apt-repository -y ppa:llvm-toolchain-bionic-10; fi
   - if [ "$CXX" == "clang++-10" ]; then sudo apt-get -y install clang-10; fi
   - eval "${MATRIX_EVAL}"
 before_script:
