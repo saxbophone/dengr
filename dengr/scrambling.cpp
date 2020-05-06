@@ -47,7 +47,9 @@ namespace {
          * this is the default constructor. it computes the scrambling table
          * according to ECMA-130, Annex B.
          */
-        constexpr ScramblerLookupTable() {
+        constexpr ScramblerLookupTable()
+            : lookup_table() // zero-initialise
+            {
             /*
              * this algorithm is based on that used in joshua_saxby_scrambler()
              * within the Python script 'ecma_130_annex_b_scrambler.py'
