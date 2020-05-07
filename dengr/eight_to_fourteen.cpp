@@ -72,7 +72,7 @@ namespace {
             for (std::size_t i = 0; i < 256; i++) {
                 // all zero-initialised elements will have is_present set to false
                 this->lookup_table[encoding_table[i]].is_present = true;
-                this->lookup_table[encoding_table[i]].value = i;
+                this->lookup_table[encoding_table[i]].value = (std::uint8_t)i;
             }
         }
 

@@ -68,7 +68,7 @@ endif()
 
 # MSVC options appear unable to be set using this method, so they are set here instead
 if (MSVC)
-    # add_compile_options(...)
+    add_compile_options(/WX /W3) # treat all warnings as errors, set warning level 3
 endif()
 
 # begin dependencies
