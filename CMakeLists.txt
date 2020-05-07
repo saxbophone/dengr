@@ -93,8 +93,10 @@ set_target_properties(
     dengr PROPERTIES VERSION ${DENGR_VERSION_STRING}
     SOVERSION ${PROJECT_VERSION_MAJOR}
 )
-# link DENGR with C math library
-target_link_libraries(dengr m)
+# link DENGR with C math library if we're on Linux
+if (UNIX AND NOT APPLE)
+    target_link_libraries(dengr m)
+endif()
 
 # the dengr executable --this is the command-line program
 add_executable(dengr-cli ${DENGR_CLI_SOURCE})
