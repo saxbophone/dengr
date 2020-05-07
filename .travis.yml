@@ -38,8 +38,8 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-  - cmake -G "$CMAKE_GENERATOR" .
-script:
-  - cmake --build build
   - cd build
+  - cmake -G "$CMAKE_GENERATOR" ..
+script:
+  - cmake --build . -j
   - ./unit_tests
