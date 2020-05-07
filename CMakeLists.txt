@@ -2,7 +2,7 @@
 # https://gist.github.com/saxbophone/b98bc600043c1ffa95dd73843e1ea6f3#file-cmakelists-txt
 
 # begin basic metadata
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 
 project(dengr VERSION 0.0.0 LANGUAGES CXX)
 
@@ -64,9 +64,11 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-function")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-variable")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-parameter")
-    # BEGIN Windows/MSVC Compiler flags
-    enable_cxx_compiler_flag_if_supported("/Za") # disable compiler extensions, run in more standard-compliant mode
-    # END Windows/MSVC Compiler flags
+endif()
+
+# MSVC options appear unable to be set using this method, so they are set here instead
+if (MSVC)
+    add_compile_options(/Za) # /Za disables extensions, hence build in more standards-compliant mode
 endif()
 
 # begin dependencies
