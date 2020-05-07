@@ -4,6 +4,18 @@
 
 Creates optical disc image files which produce visible images on the recordable (shiny) side of the disc when burned to a suitable recordable disc.
 
+### Supported Platforms
+
+Project requires a C++20 compiler. Tested on Travis-CI with the following compilers on the following platforms:
+
+- Linux
+    - GCC 10
+    - Clang 10
+- macOS
+    - Clang 10
+- Windows
+    - Visual Studio 15 2017
+
 ## Overview
 
 This is a rewrite of a previous idea I had in which I attempted to achieve this by generating a large WAV audio file to produce the visible image instead, however it turns out there's really no advantage to doing it this way, so I may as well produce raw binary (CD-ROM Mode 2) disc images instead, this avoids for the need to mess about with audio file formats and I can just output binary data direct to image file instead. The original prototype is preserved in this Git repository and can be found under the `prototype` tag.
