@@ -37,6 +37,10 @@ namespace {
      * table to be generated at compile-time).
      */
     struct PresentByte {
+        constexpr PresentByte()
+          : is_present(false)
+          , value(0)
+          {}
         bool is_present; // if false, consider this value to be 'null'
         Byte value; // the value stored, to be ignored if is_present is false
     };
