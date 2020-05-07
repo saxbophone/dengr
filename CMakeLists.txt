@@ -64,6 +64,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-function")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-variable")
     enable_cxx_compiler_flag_if_supported("-Wno-error=unused-parameter")
+    # BEGIN Windows/MSVC Compiler flags
+    enable_cxx_compiler_flag_if_supported("/Za") # disable compiler extensions, run in more standard-compliant mode
+    # END Windows/MSVC Compiler flags
 endif()
 
 # begin dependencies
