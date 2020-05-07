@@ -3,8 +3,8 @@ language: cpp
 cache: ccache
 matrix:
   include:
-    # GCC 10 on Linux
-    - os: linux
+    - name: GCC 10 on Linux
+      os: linux
       addons:
         apt:
           sources:
@@ -13,8 +13,8 @@ matrix:
             - g++-10
       env:
         - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=g++-10"
-    # Clang 10 on Linux
-    - os: linux
+    - name: Clang 10 on Linux
+      os: linux
       addons:
         apt:
           update: true
@@ -26,13 +26,13 @@ matrix:
             - clang-10
       env:
         - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++-10"
-    # Clang 10 on macOS
-    - os: osx
+    - name: Clang 10 on macOS
+      os: osx
       osx_image: xcode10.3 # this image has CLang 10.0.1 (same as Linux) and CMake 3.15
       env:
         - MATRIX_EVAL="CMAKE_GENERATOR='Unix Makefiles' && CXX=clang++"
-    # MSVC 2017 on Windows
-    - os: windows
+    - name: MSVC 2017 on Windows
+      os: windows
       env:
         - MATRIX_EVAL="CMAKE_GENERATOR='Visual Studio 15 2017'"
 before_install:
