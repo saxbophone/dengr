@@ -71,6 +71,9 @@ if (MSVC)
     add_compile_options(/WX /W3) # treat all warnings as errors, set warning level 3
 endif()
 
+# add custom dependencies directory
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
 # begin dependencies
 
 # ...Add additional dependencies here...
@@ -109,7 +112,12 @@ set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
 add_executable(unit_tests ${TEST_SOURCES})
 target_link_libraries(unit_tests dengr)
 enable_testing()
-add_test(unit_tests unit_tests)
+
+# auto-discover and add Catch2 tests from unit tests program
+include(CTest)
+include(Catch)
+
+catch_discover_tests(unit_tests)
 
 install(
     TARGETS dengr
