@@ -42,4 +42,4 @@ before_script:
   - cmake -G "$CMAKE_GENERATOR" ..
 script:
   - cmake --build . -j
-  - ./unit_tests
+  - ctest -V
