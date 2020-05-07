@@ -68,7 +68,7 @@ endif()
 
 # MSVC options appear unable to be set using this method, so they are set here instead
 if (MSVC)
-    add_compile_options(/Za) # /Za disables extensions, hence build in more standards-compliant mode
+    # add_compile_options(...)
 endif()
 
 # begin dependencies
