@@ -22,6 +22,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include <cstddef>
+
 #include "../vendor/catch.hpp"
 
 #include "../dengr/Mode2Sector.hpp"
@@ -65,7 +67,7 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
     Mode2Sector raw_sector;
     ScrambledSector scrambled_sector;
     // try and read them both into the corresponding data structures
-    for (size_t i = 0; i < 2352; i++) {
+    for (std::size_t i = 0; i < 2352; i++) {
         // because C++ is a strict language, need a temporary to cast bytes
         char input_temp[1], output_temp[1];
         input_file.read(input_temp, 1);
