@@ -33,6 +33,7 @@ namespace com::saxbophone::dengr::physical_layer {
         std::array<ChannelBit, LENGTH> bits
     ) {
         // XXX: stub implementation returning all zeroes
+        // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
         std::array<Pit, LENGTH> pits;
         return pits;
     }
@@ -43,6 +44,7 @@ namespace com::saxbophone::dengr::physical_layer {
         std::array<Pit, LENGTH> pits
     ) {
         // XXX: stub implementation returning all zeroes
+        // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
         std::array<ChannelBit, LENGTH> bits;
         return bits;
     }
