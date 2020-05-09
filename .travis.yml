@@ -13,7 +13,6 @@ matrix:
       before_script: skip
       script:
         - doxygen Doxyfile
-  include:
     - name: GCC 10 on Linux
       os: linux
       addons:
