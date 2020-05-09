@@ -32,7 +32,7 @@
 using namespace com::saxbophone::dengr;
 using namespace com::saxbophone::dengr::physical_layer;
 
-SCENARIO("Sequences of bits can be converted to sequences of pits/lands") {
+SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
     const std::size_t LENGTH = 8;
     // bits are stuffed into uints here for compactness
     auto bits_pits_combination = GENERATE(
