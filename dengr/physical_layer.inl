@@ -18,6 +18,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+#include <utility>
+
 #include <cstddef>
 
 #include "ChannelBit.hpp"
@@ -30,8 +32,21 @@ namespace com::saxbophone::dengr::physical_layer {
         Pit previous_pit,
         ChannelBitArray<LENGTH> bits
     ) {
-        using com::saxbophone::dengr::Pit;
-        PitArray<LENGTH> pits = {LAND, PIT, LAND, LAND, PIT, PIT, PIT, LAND,};
+        // used to keep track of what the current Pit/Land status is
+        std::pair<Pit, Pit> state = { Pit::LAND, Pit::PIT, };
+        // the first item is used as "current state", so swap if previous is PIT
+        if (previous_pit == Pit::PIT) {
+            std::swap(state.first, state.second);
+        }
+        PitArray<LENGTH> pits;
+        for (std::size_t i = 0; i < LENGTH; i++) {
+            // for each bit seen, if it's 1, swap states, otherwise, leave as-is
+            if (bits[i] == 0b1) {
+                std::swap(state.first, state.second);
+            }
+            // output the state in the first position of the pair
+            pits[i] = state.first;
+        }
         return pits;
     }
 
