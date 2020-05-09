@@ -42,10 +42,10 @@ namespace com::saxbophone::dengr {
      * standard (ECMA-130) itself, but is used in this library as a term of
      * convenience for the alternative which would be "14-bit byte" (this is
      * incidentally, similar to the phrasing used in ECMA-130).
-     * @warn Don't set the two most significant bits of this type. It's declared
-     * as 16-bit because 14-bit isn't an option, but it should be used as if
-     * it's 14-bit. It might be packed into a 14-bit bitfield in structures that
-     * use it.
+     * @warning Don't set the two most significant bits of this type. It's
+     * declared as 16-bit because 14-bit isn't an option, but it should be used
+     * as if it's 14-bit. It might be packed into a 14-bit bitfield in
+     * structures that use it.
      */
     typedef std::uint16_t ChannelByte;
 }
