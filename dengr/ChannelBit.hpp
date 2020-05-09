@@ -29,11 +29,21 @@
 #ifndef COM_SAXBOPHONE_DENGR_CHANNEL_BIT
 #define COM_SAXBOPHONE_DENGR_CHANNEL_BIT
 
+#include <array>
+
+
 namespace com::saxbophone::dengr {
     /**
      * @brief Each Channel Frame comprises 588 Channel bits, these are those bits
      */
     typedef bool ChannelBit;
+
+    /**
+     * @brief Convenience typedef to allow making arrays of channel bits easier
+     * @tparam LENGTH the length of the ChannelBitArray
+     */
+    template<std::size_t LENGTH>
+    using ChannelBitArray = std::array<ChannelBit, LENGTH>;
 }
 
 #endif // include guard

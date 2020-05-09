@@ -18,8 +18,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include <array>
-
 #include <cstddef>
 
 #include "ChannelBit.hpp"
@@ -28,24 +26,24 @@
 
 namespace com::saxbophone::dengr::physical_layer {
     template<std::size_t LENGTH>
-    std::array<Pit, LENGTH> bits_to_pits(
+    PitArray<LENGTH> bits_to_pits(
         Pit previous_pit,
-        std::array<ChannelBit, LENGTH> bits
+        ChannelBitArray<LENGTH> bits
     ) {
         // XXX: stub implementation returning all zeroes
         // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
-        std::array<Pit, LENGTH> pits;
+        PitArray<LENGTH> pits = {};
         return pits;
     }
 
     template<std::size_t LENGTH>
-    std::array<ChannelBit, LENGTH> pits_to_bits(
+    ChannelBitArray<LENGTH> pits_to_bits(
         Pit previous_pit,
-        std::array<Pit, LENGTH> pits
+        PitArray<LENGTH> pits
     ) {
         // XXX: stub implementation returning all zeroes
         // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
-        std::array<ChannelBit, LENGTH> bits;
+        ChannelBitArray<LENGTH> bits = {};
         return bits;
     }
 }

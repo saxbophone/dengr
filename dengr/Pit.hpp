@@ -29,6 +29,9 @@
 #ifndef COM_SAXBOPHONE_DENGR_PIT
 #define COM_SAXBOPHONE_DENGR_PIT
 
+#include <array>
+
+
 // TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace com::saxbophone::dengr {
     /**
@@ -43,6 +46,13 @@ namespace com::saxbophone::dengr {
         PIT = true,   /**< A depression on the track's surface */
         LAND = false, /**< A flat area on the track's surface */
     };
+
+    /**
+     * @brief Convenience typedef to allow making arrays of pits easier
+     * @tparam LENGTH the length of the PitArray
+     */
+    template<std::size_t LENGTH>
+    using PitArray = std::array<Pit, LENGTH>;
 }
 
 #endif // include guard

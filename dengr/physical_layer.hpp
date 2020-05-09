@@ -54,9 +54,9 @@ namespace com::saxbophone::dengr::physical_layer {
      * @returns array of Pits representing the given input bits
      */
     template<std::size_t LENGTH>
-    std::array<Pit, LENGTH> bits_to_pits(
+    PitArray<LENGTH> bits_to_pits(
         Pit previous_pit,
-        std::array<ChannelBit, LENGTH> bits
+        ChannelBitArray<LENGTH> bits
     );
 
     /**
@@ -70,10 +70,13 @@ namespace com::saxbophone::dengr::physical_layer {
      * @returns array of Channel Bits represented by the given input Pits
      */
     template<std::size_t LENGTH>
-    std::array<ChannelBit, LENGTH> pits_to_bits(
+    ChannelBitArray<LENGTH> pits_to_bits(
         Pit previous_pit,
-        std::array<Pit, LENGTH> pits
+        PitArray<LENGTH> pits
     );
 }
+
+// because these functions are templated, their implementation follows immediately
+#include "physical_layer.inl"
 
 #endif // include guard
