@@ -26,33 +26,24 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef COM_SAXBOPHONE_DENGR_PIT
-#define COM_SAXBOPHONE_DENGR_PIT
+#ifndef COM_SAXBOPHONE_DENGR_CHANNEL_BIT
+#define COM_SAXBOPHONE_DENGR_CHANNEL_BIT
 
 #include <array>
 
 
-// TODO: Change to namespace com::saxbophone::dengr when move to C++20 complete
 namespace com::saxbophone::dengr {
     /**
-     * @brief A single Pit or Land on the physical reflective layer of the disc
-     * @remarks This represents the NRZI-encoded version of the sequence of
-     * Channel Bits formed by the data in a Channel Frame.
-     * @details Definition of the pits/lands can be found in ECMA-130, sec. 11.1
-     * @details Definition of how Channel Bits are encoded into these can be
-     * found in ECMA-130, sec. 19.4
+     * @brief Each Channel Frame comprises 588 Channel bits, these are those bits
      */
-    enum Pit : bool {
-        PIT = true,   /**< A depression on the track's surface */
-        LAND = false, /**< A flat area on the track's surface */
-    };
+    typedef bool ChannelBit;
 
     /**
-     * @brief Convenience typedef to allow making arrays of pits easier
-     * @tparam LENGTH the length of the PitArray
+     * @brief Convenience typedef to allow making arrays of channel bits easier
+     * @tparam LENGTH the length of the ChannelBitArray
      */
     template<std::size_t LENGTH>
-    using PitArray = std::array<Pit, LENGTH>;
+    using ChannelBitArray = std::array<ChannelBit, LENGTH>;
 }
 
 #endif // include guard

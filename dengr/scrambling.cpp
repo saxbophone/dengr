@@ -19,7 +19,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 #include <array>
+
 #include <cstdint>
+#include <cstddef>
 
 #include "Byte.hpp"
 #include "Mode2Sector.hpp"

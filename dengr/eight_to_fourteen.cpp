@@ -20,6 +20,8 @@
  */
 #include <array>
 
+#include <cstddef>
+
 // MSVC doesn't support the alternative operators out of the box
 #ifdef _MSC_VER
 #include <iso646.h>
