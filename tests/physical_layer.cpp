@@ -33,31 +33,43 @@ using namespace com::saxbophone::dengr;
 using namespace com::saxbophone::dengr::physical_layer;
 
 SCENARIO("Sequences of bits can be converted to sequences of pits/lands") {
+    const std::size_t LENGTH = 8;
+    // bits are stuffed into uints here for compactness
+    auto bits_pits_combination = GENERATE(
+        // previous-pit pits          bits
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b01101001, 0b01001110),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b01101001, 0b10110001),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11101010, 0b10110011),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00110011, 0b11011101),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00100100, 0b11000111),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b00010000, 0b00011111)
+    );
+    // extract the bit patterns for use in the test case
+    ChannelBitArray<LENGTH> bits;
+    PitArray<LENGTH> pits;
+    // also extract the previous pit value
+    Pit previous_pit = std::get<0>(bits_pits_combination);
+    for (std::uint8_t i = 0; i < 8; i++) {
+        bits[i] = (std::get<1>(bits_pits_combination) & (1 << (7 - i))) != 0;
+        pits[i] = (Pit)((std::get<2>(bits_pits_combination) & (1 << (7 - i))) != 0);
+    }
+
     GIVEN("A sequence of Channel Bits and its corresponding sequence of pits/lands") {
-        const std::size_t LENGTH = 8;
-        // bits are stuffed into uints here for compactness
-        auto bits_pits_combination = GENERATE(
-            // previous-pit pits          expected-bits
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b01101001, 0b01001110),
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b01101001, 0b10110001),
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11101010, 0b10110011),
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00110011, 0b11011101),
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00100100, 0b11000111),
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b00010000, 0b00011111)
-        );
-        // extract the bit patterns for use in the test case
-        ChannelBitArray<LENGTH> bits;
-        PitArray<LENGTH> pits;
-        for (std::uint8_t i = 0; i < 8; i++) {
-            bits[i] = (std::get<1>(bits_pits_combination) & (1 << (7 - i))) != 0;
-            pits[i] = (Pit)((std::get<2>(bits_pits_combination) & (1 << (7 - i))) != 0);
-        }
         WHEN("The bits are passed into the pit/land encoder") {
-            // also extract the previous pit value
-            PitArray<LENGTH> output = bits_to_pits(std::get<0>(bits_pits_combination), bits);
+            PitArray<LENGTH> output = bits_to_pits(previous_pit, bits);
             THEN("The encoder should return a corresponding sequence of pits/lands") {
                 // output should be equal to pits, which is what's expected
                 REQUIRE(output == pits);
+            }
+        }
+    }
+
+    GIVEN("A sequence of pits/lands and its corresponding sequence of Channel Bits") {
+        WHEN("The pits/lands are passed into the pit/land decoder") {
+            ChannelBitArray<LENGTH> output = pits_to_bits(previous_pit, pits);
+            THEN("The decoder should return a corresponding sequence of bits") {
+                // output should be equal to bits, which is what's expected
+                REQUIRE(output == bits);
             }
         }
     }
