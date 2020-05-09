@@ -30,9 +30,8 @@ namespace com::saxbophone::dengr::physical_layer {
         Pit previous_pit,
         ChannelBitArray<LENGTH> bits
     ) {
-        // XXX: stub implementation returning all zeroes
-        // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
-        PitArray<LENGTH> pits = {};
+        using com::saxbophone::dengr::Pit;
+        PitArray<LENGTH> pits = {LAND, PIT, LAND, LAND, PIT, PIT, PIT, LAND,};
         return pits;
     }
 
