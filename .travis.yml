@@ -41,7 +41,7 @@ before_install:
   - eval "${MATRIX_EVAL}"
   # install doxygen with "brew install doxygen" on macOS OR "choco install doxygen" on Windows
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install doxygen; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then choco install doxygen.portable; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then choco install doxygen.install; fi
 before_script:
   - cd build
   - cmake -G "$CMAKE_GENERATOR" ..
