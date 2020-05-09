@@ -55,9 +55,17 @@ namespace com::saxbophone::dengr::physical_layer {
         Pit previous_pit,
         PitArray<LENGTH> pits
     ) {
-        // XXX: stub implementation returning all zeroes
-        // XXX: WRITE UNIT TESTS BEFORE IMPLEMENTATION, JOSH!
         ChannelBitArray<LENGTH> bits = {};
+        for (std::size_t i = 0; i < LENGTH; i++) {
+            // as long as the pit is the same as previous, send 0
+            if (pits[i] == previous_pit) {
+                bits[i] = 0b0;
+            } else {
+                // otherwise, send 1 and update the "previous pit" to last-seen
+                bits[i] = 0b1;
+                previous_pit = pits[i];
+            }
+        }
         return bits;
     }
 }
