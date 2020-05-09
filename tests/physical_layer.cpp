@@ -38,7 +38,10 @@ SCENARIO("Sequences of bits can be converted to sequences of pits/lands") {
         // bits are stuffed into uints here for compactness
         auto bits_pits_combination = GENERATE(
             // previous-pit pits          expected-bits
-            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b01101001, 0b01001110)
+            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b01101001, 0b01001110),
+            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b01101001, 0b10110001),
+            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11101010, 0b10110011),
+            std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00110011, 0b11011101)
         );
         // extract the bit patterns for use in the test case
         ChannelBitArray<LENGTH> bits;
