@@ -51,7 +51,7 @@ namespace com::saxbophone::dengr {
          * @note This is always a fixed value.
          * @details As per ECMA-130, sec 19.2, this shall always be following:
          * `100000000001000000000010`
-         * @warn This is a 24-bit value.
+         * @warning This is a 24-bit value.
          */
         static const std::uint32_t SYNC_HEADER;
         /**
@@ -74,8 +74,8 @@ namespace com::saxbophone::dengr {
          * their Merging Bits so they can be used in an array conveniently.
          */
         struct ChannelByteWithMergingBits {
-            ChannelByte byte : 14;
-            MergingBits merging_bits : 3;
+            ChannelByte byte : 14; /**< the ChannelByte to pack */
+            MergingBits merging_bits : 3; /**< the MergingBits to pack */
         };
 
         /**

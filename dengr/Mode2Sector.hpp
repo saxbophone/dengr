@@ -52,7 +52,7 @@ namespace com::saxbophone::dengr {
     struct Mode2Sector {
         /**
          * @brief The Bytes that make up the data contained in this Sector
-         * @warn At this point, we are deviating from the ECMA-130 standard as
+         * @warning At this point, we are deviating from the ECMA-130 standard as
          * we are appropriating the first 16 bytes that are supposed to be
          * reserved for Sync pattern and addressing Header, for usage as our own
          * data. User Data isn't actually supposed to take up more than 2336

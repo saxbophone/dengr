@@ -26,28 +26,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#ifndef COM_SAXBOPHONE_DENGR_CHANNEL_BYTE
-#define COM_SAXBOPHONE_DENGR_CHANNEL_BYTE
+#ifndef COM_SAXBOPHONE_DENGR_DENGR
+#define COM_SAXBOPHONE_DENGR_DENGR
 
-#include <cstdint>
-
-
+/**
+ * @brief Main top-level namespace for the DENGR's own support library
+ * @details Most of the data types used by DENGR are in this namespace, most
+ * non-member functions are defined in namespaces further nested in this one.
+ */
 namespace com::saxbophone::dengr {
-    /**
-     * @brief A 14-bit "byte", as output from the 8-to-14 modulator
-     * @details This is the last layer of data encoding before the physical
-     * layer of Pits and Lands is reached on the recording surface of the disc
-     * itself.
-     * @note "Channel Byte" is not an official term used within the reference
-     * standard (ECMA-130) itself, but is used in this library as a term of
-     * convenience for the alternative which would be "14-bit byte" (this is
-     * incidentally, similar to the phrasing used in ECMA-130).
-     * @warning Don't set the two most significant bits of this type. It's
-     * declared as 16-bit because 14-bit isn't an option, but it should be used
-     * as if it's 14-bit. It might be packed into a 14-bit bitfield in
-     * structures that use it.
-     */
-    typedef std::uint16_t ChannelByte;
 }
 
 #endif // include guard
