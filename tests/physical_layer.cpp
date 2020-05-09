@@ -36,7 +36,7 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
     const std::size_t LENGTH = 8;
     // bits are stuffed into uints here for compactness
     auto bits_pits_combination = GENERATE(
-        // previous-pit pits          bits
+        //                                        previous-pit bits        pits
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b01101001, 0b01001110),
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b01101001, 0b10110001),
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11101010, 0b10110011),
