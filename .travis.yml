@@ -43,3 +43,5 @@ before_script:
 script:
   - cmake --build . -j
   - ctest
+  - cd ..
+  - doxygen Doxyfile
