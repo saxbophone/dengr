@@ -42,7 +42,13 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11101010, 0b10110011),
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00110011, 0b11011101),
         std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00100100, 0b11000111),
-        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b00010000, 0b00011111)
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b00010000, 0b00011111),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b11001101, 0b10001001),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b11110111, 0b01011010),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b10010010, 0b11100011),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b00010010, 0b11100011),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::PIT , 0b10000000, 0b00000000),
+        std::tuple<Pit, std::uint8_t, std::uint8_t>(Pit::LAND, 0b00000000, 0b00000000)
     );
     // extract the bit patterns for use in the test case
     ChannelBitArray<LENGTH> bits;
