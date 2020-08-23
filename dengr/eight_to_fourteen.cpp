@@ -83,13 +83,10 @@ namespace {
          * When called with out-of-bounds indexes, it returns a 'null'
          * PresentByte
          */
-        const PresentByte& operator[](std::size_t i) const {
-            /*
-             * in this case, element #0 is our 'null' element since we know it's
-             * empty, as EFM bit pattern 0 is not valid
-             */
+        const PresentByte operator[](std::size_t i) const {
+            // return indexed byte if not out of bounds, else 'null' byte
             return i < this->lookup_table.size() ? this->lookup_table[i]
-                                                 : this->lookup_table[0];
+                                                 : PresentByte(); // 'null'
         }
 
     private:
