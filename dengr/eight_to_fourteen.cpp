@@ -99,11 +99,9 @@ namespace {
          */
         std::array<PresentByte, 0b10010010010010 + 1> lookup_table;
     };
-}
 
-namespace com::saxbophone::dengr::eight_to_fourteen {
     /**
-     * @brief Lookup table used to encode 8-bit bytes into 14-bit EFM codes
+     * Lookup table used to encode 8-bit bytes into 14-bit EFM codes
      */
     static constexpr std::array<ChannelByte, 256> ENCODING_TABLE = {
         0b01001000100000,
@@ -365,10 +363,12 @@ namespace com::saxbophone::dengr::eight_to_fourteen {
     };
 
     /**
-     * @brief Lookup table used to decode 14-bit EFM codes into 8-bit bytes
+     * Lookup table used to decode 14-bit EFM codes into 8-bit bytes
      */
     static constexpr DecoderLookupTable DECODING_TABLE(ENCODING_TABLE);
+}
 
+namespace com::saxbophone::dengr::eight_to_fourteen {
     ChannelByte encode(Byte byte) {
         /*
          * NOTE: no need to use the bounds-checking interface of std::array here
