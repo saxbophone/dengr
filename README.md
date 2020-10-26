@@ -16,6 +16,10 @@ Project requires a C++20 compiler. Tested on Travis-CI with the following compil
 - Windows
     - Visual Studio 15 2017
 
+### Dedication
+
+This work is dedicated to the late [Kris Kaspersky](https://research.checkpoint.com/2018/tribute-kris-kaspersky/), whose book _CD Cracking Uncovered Protection against unsanctioned copying_ has been an invaluable resource for explaining and reverse-engineering the lower-level encoding details of Compact Discs.
+
 ## Overview
 
 This is a rewrite of a previous idea I had in which I attempted to achieve this by generating a large WAV audio file to produce the visible image instead, however it turns out there's really no advantage to doing it this way, so I may as well produce raw binary (CD-ROM Mode 2) disc images instead, this avoids for the need to mess about with audio file formats and I can just output binary data direct to image file instead. The original prototype is preserved in this Git repository and can be found under the `prototype` tag.
