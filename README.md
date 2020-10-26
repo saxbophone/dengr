@@ -16,9 +16,9 @@ Project requires a C++20 compiler. Tested on Travis-CI with the following compil
 - Windows
     - Visual Studio 15 2017
 
-### Dedication
+## Dedication
 
-This work is dedicated to the late [Kris Kaspersky](https://research.checkpoint.com/2018/tribute-kris-kaspersky/), whose book _CD Cracking Uncovered Protection against unsanctioned copying_ has been an invaluable resource for explaining and reverse-engineering the lower-level encoding details of Compact Discs.
+This work is dedicated to the late [Kris Kaspersky](https://research.checkpoint.com/2018/tribute-kris-kaspersky/), whose book _CD Cracking Uncovered: Protection against unsanctioned copying_ has been an invaluable resource for explaining and reverse-engineering the lower-level encoding details of Compact Discs.
 
 ## Overview
 
