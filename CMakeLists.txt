@@ -122,7 +122,7 @@ enable_testing()
 include(CTest)
 include(Catch)
 
-catch_discover_tests(unit_tests)
+catch_discover_tests(unit_tests WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/tests")
 
 install(
     TARGETS dengr
