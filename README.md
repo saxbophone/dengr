@@ -1,4 +1,4 @@
-# dengr [![Build Status](https://travis-ci.com/saxbophone/dengr.svg?branch=master)](https://travis-ci.com/saxbophone/dengr) ![GitHub](https://img.shields.io/github/license/saxbophone/dengr)
+# dengr ![continuous-integration](https://github.com/saxbophone/dengr/workflows/continuous-integration/badge.svg) ![GitHub](https://img.shields.io/github/license/saxbophone/dengr)
 
 ### (Disc ENGRaver)
 
@@ -6,15 +6,13 @@ Creates optical disc image files which produce visible images on the recordable 
 
 ### Supported Platforms
 
-Project requires a C++20 compiler. Tested on Travis-CI with the following compilers on the following platforms:
+Project requires a C++20 compiler. Tested with Github Actions with the following compilers on the following platforms:
 
-- Linux
+- Linux, macOS:
     - GCC 10
     - Clang 10
-- macOS
-    - Clang 10
 - Windows
-    - Visual Studio 15 2017
+    - Visual Studio 16 2019
 
 ## Dedication
 
