@@ -124,6 +124,9 @@ include(Catch)
 
 catch_discover_tests(unit_tests)
 
+# Use CPack for generating packages
+include(CPack)
+
 install(
     TARGETS dengr
     ARCHIVE DESTINATION lib
