@@ -29,7 +29,7 @@
 #ifndef COM_SAXBOPHONE_DENGR_CHANNEL_BIT
 #define COM_SAXBOPHONE_DENGR_CHANNEL_BIT
 
-#include <array>
+#include <bitset>
 
 
 namespace com::saxbophone::dengr {
@@ -43,7 +43,7 @@ namespace com::saxbophone::dengr {
      * @tparam LENGTH the length of the ChannelBitArray
      */
     template<std::size_t LENGTH>
-    using ChannelBitArray = std::array<ChannelBit, LENGTH>;
+    using ChannelBitArray = std::bitset<LENGTH>;
 }
 
 #endif // include guard
