@@ -92,7 +92,7 @@ set(DENGR_CLI_SOURCE "main.cpp")
 # C++ source files for unit tests
 file(GLOB TEST_SOURCES "tests/*.cpp")
 # Header files
-set(DENGR_HEADERS "dengr/*.hpp")
+file(GLOB DENGR_HEADERS "dengr/*.hpp")
 
 # if project is a library
 add_library(dengr ${DENGR_SOURCES})
