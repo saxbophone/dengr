@@ -73,5 +73,5 @@ jobs:
         if: github.event_name == 'release'
         uses: actions/upload-artifact@v2
         with:
-          name: build_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
+          name: dengr_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
           path: ${{github.workspace}}/artifacts
