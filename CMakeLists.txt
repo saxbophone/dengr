@@ -94,11 +94,9 @@ endfunction()
 
 # enable a large amount of extra warnings, regardless of build mode
 if (MSVC) # MSVC supports different warning options to GCC/Clang
-    # add_compile_options(/W4) # set warning level 4
-    enable_cxx_compiler_flag_if_supported("/W4")
+    enable_cxx_compiler_flag_if_supported("/W3") # set warning level 3
     # if in debug mode, enable converting all warnings to errors too
     if (DENGR_BUILD_DEBUG)
-        # add_compile_options(/WX)
         enable_cxx_compiler_flag_if_supported("/WX")
     endif()
 else() # GCC/Clang warning option
