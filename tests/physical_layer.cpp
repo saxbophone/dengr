@@ -56,8 +56,8 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
     );
     #pragma warning( pop )
     // extract the bit patterns for use in the test case
-    ChannelBitArray<LENGTH> bits;
-    PitArray<LENGTH> pits;
+    ChannelBitArray<LENGTH> bits = {};
+    PitArray<LENGTH> pits = {};
     // also extract the previous pit value
     Pit previous_pit = std::get<0>(bits_pits_combination);
     for (std::uint8_t i = 0; i < 8; i++) {
