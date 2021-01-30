@@ -2,23 +2,47 @@ name: continuous-integration
 
 on:
   push:
-  release:
-    types: [published]
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    env:
+      BUILD_TYPE: Debug
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-20.04]
+        os: [macos-10.15, ubuntu-20.04]
         cxx: [g++-10, clang++]
         include:
-          - os: windows-latest
+          - os: windows-2019
             cxx: msvc
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache CMake dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-cmake-dependencies
+        with:
+          # CMake cache is at ${{github.workspace}}/build/_deps
+          path: ${{github.workspace}}/build/_deps
+          # Cache hash is dependent on CMakeLists files anywhere as these can change what's in the cache
+          key: ${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.cxx }}-${{ hashFiles('**/CMakeLists.txt') }}
+          # it's acceptable to reuse caches for different CMakeLists content if exact match is not available
+          # as long as the OS and Compiler match exactly
+          restore-keys: |
+            ${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.cxx }}-
+
+      # when building on master branch and not a pull request, build and test in release mode (optimised build)
+      - name: Set Build Mode to Release
+        shell: bash
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+        run: echo "BUILD_TYPE=Release" >> $GITHUB_ENV
 
       - name: Configure CMake
         env:
@@ -30,48 +54,23 @@ jobs:
         # Note the current convention is to use the -S and -B options here to specify source 
         # and build directories, but this is only available with CMake 3.13 and higher.  
         # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/artifacts
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/test_install -DENABLE_TESTS=ON
 
       - name: Build
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
-        run: cmake --build . --config Debug
+        run: cmake --build . --config $BUILD_TYPE
 
       - name: Test
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute tests defined by the CMake configuration.  
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-        run: ctest -C Debug
+        run: ctest -C $BUILD_TYPE
 
-      - name: Install
+      - name: Test Install
         working-directory: ${{github.workspace}}/build
         shell: bash
-        # Use CMake to "install" build artifacts (only interested in CMake registered targets) to our custom artifacts directory
-        run: cmake --install . --config Debug
-
-      # Only run last two steps if this is a release
-      - name: Release
-        if: github.event_name == 'release'
-        env:
-          CXX: ${{ matrix.cxx }}
-        # Use a bash shell so we can use the same syntax for environment variable
-        # access regardless of the host operating system
-        shell: bash
-        working-directory: ${{github.workspace}}/build
-        # Note the current convention is to use the -S and -B options here to specify source 
-        # and build directories, but this is only available with CMake 3.13 and higher.  
-        # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-        run: |
-          cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE/artifacts
-          cmake --build . --config Release
-          cmake --install . --config Release
-
-      # Only Upload releases
-      - name: Upload
-        if: github.event_name == 'release'
-        uses: actions/upload-artifact@v2
-        with:
-          name: dengr_${{ github.sha }}_${{ matrix.os }}_${{ matrix.cxx }}
-          path: ${{github.workspace}}/artifacts
+        # Test install with CMake to the "test_install" directory
+        run: cmake --install . --config $BUILD_TYPE
