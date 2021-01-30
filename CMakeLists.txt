@@ -142,21 +142,3 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
     enable_testing()
 endif()
-
-# C++ program source file
-set(DENGR_CLI_SOURCE "main.cpp")
-
-# the dengr executable --this is the command-line program
-add_executable(dengr-cli ${DENGR_CLI_SOURCE})
-target_include_directories(
-    dengr-cli PRIVATE "${CMAKE_SOURCE_DIR}/dengr/include"
-)
-# link the program with the library
-target_link_libraries(dengr-cli PRIVATE dengr dengr-compiler-options)
-# set output name property so it will be called dengr despite target name being different
-set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
-
-install(
-    TARGETS dengr-cli
-    RUNTIME DESTINATION bin
-)
