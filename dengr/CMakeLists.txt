@@ -34,6 +34,7 @@ target_link_libraries(dengr PRIVATE dengr-compiler-options dengr-efm dengr-scram
 # set up version and soversion for the main library object
 set_target_properties(
     dengr PROPERTIES
+    PUBLIC_HEADER ${DENGR_HEADERS}
     VERSION ${DENGR_VERSION_STRING}
     SOVERSION ${PROJECT_VERSION_MAJOR}
 )
@@ -57,15 +58,5 @@ install(
     TARGETS dengr
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
-)
-
-# Install main library header files, both to rough and precise install locations
-install(
-    FILES ${DENGR_HEADERS}
-    DESTINATION "include/${DENGR_ROUGH_HEADER_DESTINATION}"
-)
-
-install(
-    FILES ${DENGR_HEADERS}
-    DESTINATION "include/${DENGR_PRECISE_HEADER_DESTINATION}"
+    PUBLIC_HEADER DESTINATION "include/${DENGR_PRECISE_HEADER_DESTINATION}"
 )
