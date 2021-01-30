@@ -22,11 +22,11 @@
 
 #include <cstddef>
 
-#include "../vendor/catch.hpp"
+#include <catch2/catch.hpp>
 
-#include "../dengr/ChannelBit.hpp"
-#include "../dengr/Pit.hpp"
-#include "../dengr/physical_layer.hpp"
+#include "ChannelBit.hpp"
+#include "Pit.hpp"
+#include "physical_layer.hpp"
 
 
 using namespace com::saxbophone::dengr;

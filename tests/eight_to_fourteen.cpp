@@ -20,11 +20,11 @@
  */
 #include <utility>
 
-#include "../vendor/catch.hpp"
+#include <catch2/catch.hpp>
 
-#include "../dengr/Byte.hpp"
-#include "../dengr/ChannelByte.hpp"
-#include "../dengr/eight_to_fourteen.hpp"
+#include "Byte.hpp"
+#include "ChannelByte.hpp"
+#include "eight_to_fourteen.hpp"
 
 
 using namespace com::saxbophone::dengr;

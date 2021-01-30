@@ -24,11 +24,11 @@
 
 #include <cstddef>
 
-#include "../vendor/catch.hpp"
+#include <catch2/catch.hpp>
 
-#include "../dengr/Mode2Sector.hpp"
-#include "../dengr/ScrambledSector.hpp"
-#include "../dengr/scrambling.hpp"
+#include "Mode2Sector.hpp"
+#include "ScrambledSector.hpp"
+#include "scrambling.hpp"
 
 
 using namespace com::saxbophone::dengr;
@@ -39,10 +39,10 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
     // load each input and output data file, reading in their contents
     std::ifstream input_file, output_file;
     std::stringstream input_name, output_name;
-    input_name << "../tests/scrambling_test_fixtures/test_"
+    input_name << "scrambling_test_fixtures/test_"
                << std::setfill('0') << std::setw(2)
                << file_number << "_input.bin";
-    output_name << "../tests/scrambling_test_fixtures/test_"
+    output_name << "scrambling_test_fixtures/test_"
                << std::setfill('0') << std::setw(2)
                << file_number << "_output.bin";
     // try and open both files
