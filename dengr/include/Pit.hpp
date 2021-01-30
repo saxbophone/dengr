@@ -42,7 +42,7 @@ namespace com::saxbophone::dengr {
      * @details Definition of how Channel Bits are encoded into these can be
      * found in ECMA-130, sec. 19.4
      */
-    enum Pit : bool {
+    enum class Pit : bool {
         PIT = true,   /**< A depression on the track's surface */
         LAND = false, /**< A flat area on the track's surface */
     };

@@ -36,6 +36,16 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
     const std::size_t LENGTH = 8;
     // convenience typedef to keep the test case data lines within limits
     typedef std::tuple<Pit, std::uint8_t, std::uint8_t> TestData;
+    /*
+     * MSVC Warning C4244 produces spurious warnings for implicit type
+     * conversions in the call to GENERATE(). We disable this warning for
+     * this statement as the alternative (to silence the warning) involves
+     * en-masse repetition of types in a truly redundant manner (readability).
+     */
+    #if defined(_MSC_VER)
+    #pragma warning( push )
+    #pragma warning( disable : 4244 )
+    #endif
     // bits are stuffed into uints here for compactness
     auto bits_pits_combination = GENERATE(
         //    previous-pit  bits        pits
@@ -52,9 +62,12 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
         TestData(Pit::PIT , 0b10000000, 0b00000000),
         TestData(Pit::LAND, 0b00000000, 0b00000000)
     );
+    #if defined(_MSC_VER)
+    #pragma warning( pop )
+    #endif
     // extract the bit patterns for use in the test case
-    ChannelBitArray<LENGTH> bits;
-    PitArray<LENGTH> pits;
+    ChannelBitArray<LENGTH> bits = {};
+    PitArray<LENGTH> pits = {};
     // also extract the previous pit value
     Pit previous_pit = std::get<0>(bits_pits_combination);
     for (std::uint8_t i = 0; i < 8; i++) {

@@ -64,8 +64,8 @@ SCENARIO("Sectors can be scrambled according to ECMA-130 Annex B") {
     );
     REQUIRE(input_file.is_open());
     REQUIRE(output_file.is_open());
-    Mode2Sector raw_sector;
-    ScrambledSector scrambled_sector;
+    Mode2Sector raw_sector = {};
+    ScrambledSector scrambled_sector = {};
     // try and read them both into the corresponding data structures
     for (std::size_t i = 0; i < 2352; i++) {
         // because C++ is a strict language, need a temporary to cast bytes
