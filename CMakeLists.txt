@@ -61,16 +61,8 @@ set(
 )
 set(DENGR_ESCAPED_VERSION_STRING "\"${DENGR_VERSION_STRING}\"")
 
-# Generate rough (nearest major) version-dependent header installation folder
-set(
-    DENGR_ROUGH_HEADER_DESTINATION
-    "dengr-${PROJECT_VERSION_MAJOR}"
-)
-# Generate precise (major and minor) version-dependent header installation folder
-set(
-    DENGR_PRECISE_HEADER_DESTINATION
-    "dengr-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
-)
+# Generate public header files installation subdirectory name
+set(DENGR_PUBLIC_HEADER_DESTINATION "dengr")
 # end basic metadata
 
 # This is a special target which only exists to capture compilation options

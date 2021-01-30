@@ -3,27 +3,6 @@ set(
     DENGR_SOURCES
     "src/ChannelFrame.cpp"
 )
-# Header files
-set(
-    DENGR_HEADERS
-    "include/Byte.hpp"
-    "include/ChannelBit.hpp"
-    "include/ChannelByte.hpp"
-    "include/ChannelFrame.hpp"
-    "include/dengr.hpp"
-    "include/eight_to_fourteen/eight_to_fourteen.hpp"
-    "include/F1Frame.hpp"
-    "include/F2Frame.hpp"
-    "include/F3Frame.hpp"
-    "include/MergingBits.hpp"
-    "include/Mode2Sector.hpp"
-    "include/physical_layer/physical_layer.hpp"
-    "include/physical_layer/physical_layer.inl"
-    "include/Pit.hpp"
-    "include/ScrambledSector.hpp"
-    "include/scrambling/scrambling.hpp"
-    "include/Section.hpp"
-)
 
 add_subdirectory(src/eight_to_fourteen)
 add_subdirectory(src/scrambling)
@@ -34,7 +13,7 @@ target_link_libraries(dengr PRIVATE dengr-compiler-options dengr-efm dengr-scram
 # set up version and soversion for the main library object
 set_target_properties(
     dengr PROPERTIES
-    PUBLIC_HEADER ${DENGR_HEADERS}
+    PUBLIC_HEADER "${DENGR_HEADERS}"
     VERSION ${DENGR_VERSION_STRING}
     SOVERSION ${PROJECT_VERSION_MAJOR}
 )
@@ -58,5 +37,8 @@ install(
     TARGETS dengr
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
-    PUBLIC_HEADER DESTINATION "include/${DENGR_PRECISE_HEADER_DESTINATION}"
+)
+
+install(
+    DIRECTORY "include/" DESTINATION "include/${DENGR_PUBLIC_HEADER_DESTINATION}"
 )
