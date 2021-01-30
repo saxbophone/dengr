@@ -60,6 +60,17 @@ set(
     "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 )
 set(DENGR_ESCAPED_VERSION_STRING "\"${DENGR_VERSION_STRING}\"")
+
+# Generate rough (nearest major) version-dependent header installation folder
+set(
+    DENGR_ROUGH_HEADER_DESTINATION
+    "dengr-${PROJECT_VERSION_MAJOR}"
+)
+# Generate precise (major and minor) version-dependent header installation folder
+set(
+    DENGR_PRECISE_HEADER_DESTINATION
+    "dengr-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
+)
 # end basic metadata
 
 # This is a special target which only exists to capture compilation options
@@ -77,6 +88,12 @@ target_compile_definitions(
     -DDENGR_VERSION_MINOR=${PROJECT_VERSION_MINOR}
     -DDENGR_VERSION_PATCH=${PROJECT_VERSION_PATCH}
     -DDENGR_VERSION_STRING=${DENGR_ESCAPED_VERSION_STRING}
+)
+# library public header files location
+target_include_directories(
+    dengr-compiler-options INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/dengr/include>
+    $<INSTALL_INTERFACE:include/${DENGR_PRECISE_HEADER_DESTINATION}>  # <prefix>/include/dengr-<version>
 )
 
 # used for enabling additional compiler options if supported

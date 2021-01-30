@@ -28,7 +28,7 @@
 
 #include "Mode2Sector.hpp"
 #include "ScrambledSector.hpp"
-#include "scrambling.hpp"
+#include "scrambling/scrambling.hpp"
 
 
 using namespace com::saxbophone::dengr;
