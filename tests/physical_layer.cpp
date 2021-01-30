@@ -21,7 +21,6 @@
 #include <tuple>
 
 #include <cstddef>
-#include <cstdint>
 
 #include <catch2/catch.hpp>
 
@@ -37,25 +36,28 @@ SCENARIO("Sequences of bits can be converted to/from sequences of pits/lands") {
     const std::size_t LENGTH = 8;
     // convenience typedef to keep the test case data lines within limits
     typedef std::tuple<Pit, std::uint8_t, std::uint8_t> TestData;
+    #pragma warning( push )
+    #pragma warning( disable : 4244 )
     // bits are stuffed into uints here for compactness
     auto bits_pits_combination = GENERATE(
         //    previous-pit  bits        pits
-        TestData{Pit::LAND, std::uint8_t{0b01101001}, std::uint8_t{0b01001110}},
-        TestData{Pit::PIT , std::uint8_t{0b01101001}, std::uint8_t{0b10110001}},
-        TestData{Pit::LAND, std::uint8_t{0b11101010}, std::uint8_t{0b10110011}},
-        TestData{Pit::PIT , std::uint8_t{0b00110011}, std::uint8_t{0b11011101}},
-        TestData{Pit::PIT , std::uint8_t{0b00100100}, std::uint8_t{0b11000111}},
-        TestData{Pit::LAND, std::uint8_t{0b00010000}, std::uint8_t{0b00011111}},
-        TestData{Pit::LAND, std::uint8_t{0b11001101}, std::uint8_t{0b10001001}},
-        TestData{Pit::PIT , std::uint8_t{0b11110111}, std::uint8_t{0b01011010}},
-        TestData{Pit::LAND, std::uint8_t{0b10010010}, std::uint8_t{0b11100011}},
-        TestData{Pit::PIT , std::uint8_t{0b00010010}, std::uint8_t{0b11100011}},
-        TestData{Pit::PIT , std::uint8_t{0b10000000}, std::uint8_t{0b00000000}},
-        TestData{Pit::LAND, std::uint8_t{0b00000000}, std::uint8_t{0b00000000}}
+        TestData(Pit::LAND, 0b01101001, 0b01001110),
+        TestData(Pit::PIT , 0b01101001, 0b10110001),
+        TestData(Pit::LAND, 0b11101010, 0b10110011),
+        TestData(Pit::PIT , 0b00110011, 0b11011101),
+        TestData(Pit::PIT , 0b00100100, 0b11000111),
+        TestData(Pit::LAND, 0b00010000, 0b00011111),
+        TestData(Pit::LAND, 0b11001101, 0b10001001),
+        TestData(Pit::PIT , 0b11110111, 0b01011010),
+        TestData(Pit::LAND, 0b10010010, 0b11100011),
+        TestData(Pit::PIT , 0b00010010, 0b11100011),
+        TestData(Pit::PIT , 0b10000000, 0b00000000),
+        TestData(Pit::LAND, 0b00000000, 0b00000000)
     );
+    #pragma warning( pop )
     // extract the bit patterns for use in the test case
-    ChannelBitArray<LENGTH> bits = {};
-    PitArray<LENGTH> pits = {};
+    ChannelBitArray<LENGTH> bits;
+    PitArray<LENGTH> pits;
     // also extract the previous pit value
     Pit previous_pit = std::get<0>(bits_pits_combination);
     for (std::uint8_t i = 0; i < 8; i++) {
