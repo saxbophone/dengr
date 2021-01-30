@@ -85,7 +85,7 @@ target_compile_definitions(
 target_include_directories(
     dengr-compiler-options INTERFACE
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/dengr/include>
-    $<INSTALL_INTERFACE:include/${DENGR_PRECISE_HEADER_DESTINATION}>  # <prefix>/include/dengr-<version>
+    $<INSTALL_INTERFACE:include/${DENGR_PUBLIC_HEADER_DESTINATION}>  # <prefix>/include/<$DENGR_PUBLIC_HEADER_DESTINATION>
 )
 
 # used for enabling additional compiler options if supported
