@@ -7,7 +7,7 @@ set(
 add_subdirectory(src/eight_to_fourteen)
 add_subdirectory(src/scrambling)
 
-add_library(dengr)
+add_library(dengr SHARED)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
 target_link_libraries(dengr PRIVATE dengr-compiler-options dengr-efm dengr-scrambling)
 # set up version and soversion for the main library object
