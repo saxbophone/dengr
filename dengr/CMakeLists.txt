@@ -6,6 +6,14 @@ set(
 
 add_library(dengr SHARED)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
+include (GenerateExportHeader)
+GENERATE_EXPORT_HEADER(
+    dengr
+    BASE_NAME dengr
+    EXPORT_MACRO_NAME dengr_EXPORTS
+    EXPORT_FILE_NAME dengr_EXPORTS.h
+    STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC
+)
 
 add_subdirectory(src/eight_to_fourteen)
 add_subdirectory(src/scrambling)
