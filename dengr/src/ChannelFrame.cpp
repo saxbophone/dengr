@@ -18,7 +18,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
- #include <cstdint>
+#include "dengr_EXPORTS.h"
+
+#include <cstdint>
 
 #include "ChannelFrame.hpp"
 

@@ -4,8 +4,11 @@ set(
     "src/ChannelFrame.cpp"
 )
 
-add_library(dengr SHARED)
+add_library(dengr)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 include (GenerateExportHeader)
 GENERATE_EXPORT_HEADER(
     dengr
