@@ -1,3 +1,4 @@
+# Use FetchContent to grab Catch2, unit testing dependency
 Include(FetchContent)
 
 set(FETCHCONTENT_QUIET OFF)
@@ -12,6 +13,7 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests)
 target_sources(tests PRIVATE eight_to_fourteen.cpp main.cpp physical_layer.cpp scrambling.cpp)
+# tests use same compiler options as main project
 target_link_libraries(tests PRIVATE dengr-compiler-options dengr Catch2::Catch2)
 
 enable_testing()
