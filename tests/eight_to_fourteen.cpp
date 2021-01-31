@@ -24,7 +24,7 @@
 
 #include "Byte.hpp"
 #include "ChannelByte.hpp"
-#include "eight_to_fourteen.hpp"
+#include "eight_to_fourteen/eight_to_fourteen.hpp"
 
 
 using namespace com::saxbophone::dengr;

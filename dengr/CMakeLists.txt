@@ -1,86 +1,56 @@
-# C++ library source files
+# Generate public header files installation subdirectory name
+set(DENGR_PUBLIC_HEADER_DESTINATION "dengr")
+
+# top-level namespace C++ library source files
 set(
     DENGR_SOURCES
     "src/ChannelFrame.cpp"
-    "src/eight_to_fourteen.cpp"
-    "src/scrambling.cpp"
 )
-# Header files
-set(
-    DENGR_HEADERS
-    "include/Byte.hpp"
-    "include/ChannelBit.hpp"
-    "include/ChannelByte.hpp"
-    "include/ChannelFrame.hpp"
-    "include/dengr.hpp"
-    "include/eight_to_fourteen.hpp"
-    "include/F1Frame.hpp"
-    "include/F2Frame.hpp"
-    "include/F3Frame.hpp"
-    "include/MergingBits.hpp"
-    "include/Mode2Sector.hpp"
-    "include/physical_layer.hpp"
-    "include/physical_layer.inl"
-    "include/Pit.hpp"
-    "include/ScrambledSector.hpp"
-    "include/scrambling.hpp"
-    "include/Section.hpp"
-)
-
-# Generate rough (nearest major) version-dependent header installation folder
-set(
-    DENGR_ROUGH_HEADER_DESTINATION
-    "dengr-${PROJECT_VERSION_MAJOR}"
-)
-# Generate precise (major and minor) version-dependent header installation folder
-set(
-    DENGR_PRECISE_HEADER_DESTINATION
-    "dengr-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
-)
-
-add_library(dengr)
+add_library(dengr STATIC)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
+# library public header files location
 target_include_directories(
     dengr PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include/${DENGR_PRECISE_HEADER_DESTINATION}>  # <prefix>/include/dengr-<version>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/dengr/include>
+    $<INSTALL_INTERFACE:include/${DENGR_PUBLIC_HEADER_DESTINATION}>  # <prefix>/include/<$DENGR_PUBLIC_HEADER_DESTINATION>
 )
-target_link_libraries(dengr PRIVATE dengr-compiler-options)
+# pass in version of project as preprocessor definitions
+target_compile_definitions(
+    dengr PRIVATE
+    -DDENGR_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+    -DDENGR_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+    -DDENGR_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+    -DDENGR_VERSION_STRING=${DENGR_ESCAPED_VERSION_STRING}
+)
 # set up version and soversion for the main library object
 set_target_properties(
     dengr PROPERTIES
     VERSION ${DENGR_VERSION_STRING}
     SOVERSION ${PROJECT_VERSION_MAJOR}
 )
-
-# C++ program source file
-set(DENGR_CLI_SOURCE "main.cpp")
-
-# the dengr executable --this is the command-line program
-add_executable(dengr-cli ${DENGR_CLI_SOURCE})
-# link the program with the library
-target_link_libraries(dengr-cli PRIVATE dengr dengr-compiler-options)
-# set output name property so it will be called dengr despite target name being different
-set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
-
-install(
-    TARGETS dengr-cli
-    RUNTIME DESTINATION bin
-)
-
+# inherit common project compiler options
+target_link_libraries(dengr PRIVATE dengr-compiler-options)
+# sources for sub-namespaces of the library
+add_subdirectory(src/eight_to_fourteen)
+add_subdirectory(src/scrambling)
 install(
     TARGETS dengr
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
 )
-
-# Install main library header files, both to rough and precise install locations
 install(
-    FILES ${DENGR_HEADERS}
-    DESTINATION "include/${DENGR_ROUGH_HEADER_DESTINATION}"
+    DIRECTORY "include/" DESTINATION "include/${DENGR_PUBLIC_HEADER_DESTINATION}"
 )
 
+# C++ program source file
+set(DENGR_CLI_SOURCE "main.cpp")
+# the dengr executable --this is the command-line program
+add_executable(dengr-cli ${DENGR_CLI_SOURCE})
+# link the program with the library and compiler options target
+target_link_libraries(dengr-cli PRIVATE dengr-compiler-options dengr)
+# set output name property so it will be called dengr despite target name being different
+set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
 install(
-    FILES ${DENGR_HEADERS}
-    DESTINATION "include/${DENGR_PRECISE_HEADER_DESTINATION}"
+    TARGETS dengr-cli
+    RUNTIME DESTINATION bin
 )

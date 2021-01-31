@@ -60,6 +60,7 @@ set(
     "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 )
 set(DENGR_ESCAPED_VERSION_STRING "\"${DENGR_VERSION_STRING}\"")
+
 # end basic metadata
 
 # This is a special target which only exists to capture compilation options
@@ -67,17 +68,8 @@ set(DENGR_ESCAPED_VERSION_STRING "\"${DENGR_VERSION_STRING}\"")
 # options which would be inherited by dependencies as well, which is bad
 # because dengr uses strict compiler warning options which not all other
 # projects can build successfully with.
-# Any target linked with this one will inherit the compiler options and
-# definitions used for dengr.
+# Any target linked with this one will inherit the compiler options used for dengr.
 add_library(dengr-compiler-options INTERFACE)
-# pass in version of project as preprocessor definitions
-target_compile_definitions(
-    dengr-compiler-options INTERFACE
-    -DDENGR_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
-    -DDENGR_VERSION_MINOR=${PROJECT_VERSION_MINOR}
-    -DDENGR_VERSION_PATCH=${PROJECT_VERSION_PATCH}
-    -DDENGR_VERSION_STRING=${DENGR_ESCAPED_VERSION_STRING}
-)
 
 # used for enabling additional compiler options if supported
 include(CheckCXXCompilerFlag)

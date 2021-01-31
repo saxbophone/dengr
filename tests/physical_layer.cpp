@@ -26,7 +26,7 @@
 
 #include "ChannelBit.hpp"
 #include "Pit.hpp"
-#include "physical_layer.hpp"
+#include "physical_layer/physical_layer.hpp"
 
 
 using namespace com::saxbophone::dengr;

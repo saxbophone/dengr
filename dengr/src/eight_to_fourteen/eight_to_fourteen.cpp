@@ -25,7 +25,7 @@
 
 #include "Byte.hpp"
 #include "ChannelByte.hpp"
-#include "eight_to_fourteen.hpp"
+#include "eight_to_fourteen/eight_to_fourteen.hpp"
 
 
 // using unnamed namespace here to keep the DecoderLookupTable class internal

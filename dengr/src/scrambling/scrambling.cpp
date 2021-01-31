@@ -26,7 +26,7 @@
 #include "Byte.hpp"
 #include "Mode2Sector.hpp"
 #include "ScrambledSector.hpp"
-#include "scrambling.hpp"
+#include "scrambling/scrambling.hpp"
 
 
 // using unnamed namespace here to keep the ScramblerLookupTable class internal
