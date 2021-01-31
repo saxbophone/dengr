@@ -12,9 +12,7 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests)
 target_sources(tests PRIVATE eight_to_fourteen.cpp main.cpp physical_layer.cpp scrambling.cpp)
-target_link_libraries(tests PRIVATE dengr-compiler-options)
-target_link_libraries(tests PRIVATE dengr)
-target_link_libraries(tests PRIVATE Catch2::Catch2)
+target_link_libraries(tests PRIVATE dengr-compiler-options dengr Catch2::Catch2)
 
 enable_testing()
 
