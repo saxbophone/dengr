@@ -9,15 +9,6 @@ target_sources(dengr PRIVATE ${DENGR_SOURCES})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-include (GenerateExportHeader)
-GENERATE_EXPORT_HEADER(
-    dengr
-    BASE_NAME dengr
-    EXPORT_MACRO_NAME SHARED_EXPORT
-    EXPORT_FILE_NAME dengr_EXPORTS.h
-    STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC
-)
-
 add_subdirectory(src/eight_to_fourteen)
 add_subdirectory(src/scrambling)
 
@@ -28,6 +19,7 @@ set_target_properties(
     PUBLIC_HEADER "${DENGR_HEADERS}"
     VERSION ${DENGR_VERSION_STRING}
     SOVERSION ${PROJECT_VERSION_MAJOR}
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 
 # C++ program source file
