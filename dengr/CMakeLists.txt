@@ -4,7 +4,7 @@ set(
     "src/ChannelFrame.cpp"
 )
 
-add_library(dengr)
+add_library(dengr SHARED)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
