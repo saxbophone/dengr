@@ -36,7 +36,7 @@ set(DENGR_CLI_SOURCE "main.cpp")
 # the dengr executable --this is the command-line program
 add_executable(dengr-cli ${DENGR_CLI_SOURCE})
 # link the program with the library
-target_link_libraries(dengr-cli PRIVATE dengr dengr-compiler-options)
+target_link_libraries(dengr-cli dengr dengr-compiler-options)
 # set output name property so it will be called dengr despite target name being different
 set_target_properties(dengr-cli PROPERTIES OUTPUT_NAME dengr)
 
