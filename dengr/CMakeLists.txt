@@ -8,6 +8,9 @@ set(
 )
 add_library(dengr STATIC)
 target_sources(dengr PRIVATE ${DENGR_SOURCES})
+# sources for sub-namespaces of the library
+add_subdirectory(src/eight_to_fourteen)
+add_subdirectory(src/scrambling)
 # library public header files location
 target_include_directories(
     dengr PUBLIC
@@ -30,9 +33,6 @@ set_target_properties(
 )
 # inherit common project compiler options
 target_link_libraries(dengr PRIVATE dengr-compiler-options)
-# sources for sub-namespaces of the library
-add_subdirectory(src/eight_to_fourteen)
-add_subdirectory(src/scrambling)
 install(
     TARGETS dengr
     ARCHIVE DESTINATION lib
