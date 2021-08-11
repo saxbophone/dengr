@@ -123,9 +123,7 @@ namespace {
          */
         std::array<Byte, 2340> lookup_table;
     };
-}
 
-namespace com::saxbophone::dengr::scrambling {
     /*
      * this is the single lookup table instance for scrambling
      * it is initialised at compile-time (forced by the constexpr qualifier,
@@ -134,29 +132,33 @@ namespace com::saxbophone::dengr::scrambling {
      */
     static constexpr ScramblerLookupTable LOOKUP_TABLE;
 
-    ScrambledSector scramble(Mode2Sector raw_sector) {
-        ScrambledSector scrambled_sector;
+    /*
+     * Internal helper function for scrambling/unscrambling.
+     * This reduces code duplication, as the process is completely symmetric,
+     * only the input/output types differing slightly.
+     */
+    void scramble_unscramble(const Mode2Sector& input, Mode2Sector& output) {
         // first twelve bytes are copied verbatim
         for (std::size_t i = 0; i < 12; i++) {
-            scrambled_sector.bytes[i] = raw_sector.bytes[i];
+            output.bytes[i] = input.bytes[i];
         }
-        // bytes can be scrambled by XOR'ing them with the lookup table
+        // bytes can be (un)scrambled by XOR'ing them with the lookup table
         for (std::size_t i = 12; i < 2352; i++) {
-            scrambled_sector.bytes[i] = raw_sector.bytes[i] ^ LOOKUP_TABLE[i - 12];
+            output.bytes[i] = input.bytes[i] ^ LOOKUP_TABLE[i - 12];
         }
+    }
+}
+
+namespace com::saxbophone::dengr::scrambling {
+    ScrambledSector scramble(Mode2Sector raw_sector) {
+        ScrambledSector scrambled_sector;
+        scramble_unscramble(raw_sector, scrambled_sector);
         return scrambled_sector;
     }
 
     Mode2Sector unscramble(ScrambledSector scrambled_sector) {
         Mode2Sector unscrambled_sector;
-        // first twelve bytes are copied verbatim
-        for (std::size_t i = 0; i < 12; i++) {
-            unscrambled_sector.bytes[i] = scrambled_sector.bytes[i];
-        }
-        // bytes can be unscrambled by XOR'ing them with the lookup table
-        for (std::size_t i = 12; i < 2352; i++) {
-            unscrambled_sector.bytes[i] = scrambled_sector.bytes[i] ^ LOOKUP_TABLE[i - 12];
-        }
+        scramble_unscramble(scrambled_sector, unscrambled_sector);
         return unscrambled_sector;
     }
 }
